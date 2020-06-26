@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	cidr "github.com/apparentlymart/go-cidr/cidr"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/go-connections/nat"
 	"github.com/rancher/rke/docker"
@@ -70,6 +71,9 @@ const (
 
 	WeaveNetworkPlugin  = "weave"
 	WeaveNetworkAppName = "weave-net"
+
+	AciNetworkPlugin = "ACI"
+
 	// List of map keys to be used with network templates
 
 	// EtcdEndpoints is the server address for Etcd, used by calico
@@ -104,17 +108,67 @@ const (
 
 	Calicoctl = "Calicoctl"
 
-	FlannelInterface = "FlannelInterface"
-	FlannelBackend   = "FlannelBackend"
-	CanalInterface   = "CanalInterface"
-	FlexVolPluginDir = "FlexVolPluginDir"
-	WeavePassword    = "WeavePassword"
-	MTU              = "MTU"
-	RBACConfig       = "RBACConfig"
-	ClusterVersion   = "ClusterVersion"
-
-	NodeSelector   = "NodeSelector"
-	UpdateStrategy = "UpdateStrategy"
+	FlannelInterface        = "FlannelInterface"
+	FlannelBackend          = "FlannelBackend"
+	CanalInterface          = "CanalInterface"
+	FlexVolPluginDir        = "FlexVolPluginDir"
+	WeavePassword           = "WeavePassword"
+	MTU                     = "MTU"
+	RBACConfig              = "RBACConfig"
+	ClusterVersion          = "ClusterVersion"
+	SystemIdentifier        = "SystemIdentifier"
+	ApicHosts               = "ApicHosts"
+	Token                   = "Token"
+	ApicUserName            = "ApicUserName"
+	ApicUserKey             = "ApicUserKey"
+	ApicUserCrt             = "ApicUserCrt"
+	ApicRefreshTime         = "ApicRefreshTime"
+	VmmDomain               = "VmmDomain"
+	VmmController           = "VmmController"
+	EncapType               = "EncapType"
+	McastRangeStart         = "McastRangeStart"
+	McastRangeEnd           = "McastRangeEnd"
+	AEP                     = "AEP"
+	VRFName                 = "VRFName"
+	VRFTenant               = "VRFTenant"
+	L3Out                   = "L3Out"
+	L3OutExternalNetworks   = "L3OutExternalNetworks"
+	DynamicExternalSubnet   = "DynamicExternalSubnet"
+	StaticExternalSubnet    = "StaticExternalSubnet"
+	ServiceGraphSubnet      = "ServiceGraphSubnet"
+	KubeAPIVlan             = "KubeAPIVlan"
+	ServiceVlan             = "ServiceVlan"
+	InfraVlan               = "InfraVlan"
+	ImagePullPolicy         = "ImagePullPolicy"
+	ImagePullSecret         = "ImagePullSecret"
+	Tenant                  = "Tenant"
+	ServiceMonitorInterval  = "ServiceMonitorInterval"
+	PBRTrackingNonSnat      = "PBRTrackingNonSnat"
+	InstallIstio            = "InstallIstio"
+	IstioProfile            = "IstioProfile"
+	DropLogEnable           = "DropLogEnable"
+	ControllerLogLevel      = "ControllerLogLevel"
+	HostAgentLogLevel       = "HostAgentLogLevel"
+	OpflexAgentLogLevel     = "OpflexAgentLogLevel"
+	AciCniDeployContainer   = "AciCniDeployContainer"
+	AciHostContainer        = "AciHostContainer"
+	AciOpflexContainer      = "AciOpflexContainer"
+	AciMcastContainer       = "AciMcastContainer"
+	AciOpenvSwitchContainer = "AciOpenvSwitchContainer"
+	AciControllerContainer  = "AciControllerContainer"
+	StaticServiceIPStart    = "StaticServiceIPStart"
+	StaticServiceIPEnd      = "StaticServiceIPEnd"
+	PodGateway              = "PodGateway"
+	PodIPStart              = "PodIPStart"
+	PodIPEnd                = "PodIPEnd"
+	NodeServiceIPStart      = "NodeServiceIPStart"
+	NodeServiceIPEnd        = "NodeServiceIPEnd"
+	ServiceIPStart          = "ServiceIPStart"
+	ServiceIPEnd            = "ServiceIPEnd"
+	OVSMemoryLimit          = "OVSMemoryLimit"
+	NodeSubnet              = "NodeSubnet"
+	NodeSelector            = "NodeSelector"
+	UpdateStrategy          = "UpdateStrategy"
 )
 
 var EtcdPortList = []string{
@@ -147,6 +201,8 @@ func (c *Cluster) deployNetworkPlugin(ctx context.Context, data map[string]inter
 		return c.doCanalDeploy(ctx, data)
 	case WeaveNetworkPlugin:
 		return c.doWeaveDeploy(ctx, data)
+	case AciNetworkPlugin:
+		return c.doAciDeploy(ctx, data)
 	case NoNetworkPlugin:
 		log.Infof(ctx, "[network] Not deploying a cluster network, expecting custom CNI")
 		return nil
@@ -284,9 +340,98 @@ func (c *Cluster) doWeaveDeploy(ctx context.Context, data map[string]interface{}
 	return c.doAddonDeploy(ctx, pluginYaml, NetworkPluginResourceName, true)
 }
 
+func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) error {
+	refreshTime, err := atoiWithDefault(c.Network.AciNetworkProvider.ApicRefreshTime, DefaultApicRefreshTime)
+	if err != nil {
+		return err
+	}
+	serviceMonitorInterval, err := atoiWithDefault(c.Network.AciNetworkProvider.ServiceMonitorInterval, DefaultServiceMonitorInterval)
+	if err != nil {
+		return err
+	}
+	_, clusterCIDR, err := net.ParseCIDR(c.ClusterCIDR)
+	if err != nil {
+		return err
+	}
+	podIPStart, podIPEnd := cidr.AddressRange(clusterCIDR)
+	_, staticExternalSubnet, err := net.ParseCIDR(c.Network.AciNetworkProvider.StaticExternalSubnet)
+	staticServiceIPStart, staticServiceIPEnd := cidr.AddressRange(staticExternalSubnet)
+	_, svcGraphSubnet, err := net.ParseCIDR(c.Network.AciNetworkProvider.ServiceGraphSubnet)
+	if err != nil {
+		return err
+	}
+	nodeServiceIPStart, nodeServiceIPEnd := cidr.AddressRange(svcGraphSubnet)
+	_, dynamicExternalSubnet, err := net.ParseCIDR(c.Network.AciNetworkProvider.DynamicExternalSubnet)
+	if err != nil {
+		return err
+	}
+	serviceIPStart, serviceIPEnd := cidr.AddressRange(dynamicExternalSubnet)
+	AciConfig := map[string]interface{}{
+		SystemIdentifier:        c.Network.AciNetworkProvider.SystemIdentifier,
+		ApicHosts:               c.Network.AciNetworkProvider.ApicHosts,
+		Token:                   c.Network.AciNetworkProvider.Token,
+		ApicUserName:            c.Network.AciNetworkProvider.ApicUserName,
+		ApicUserKey:             c.Network.AciNetworkProvider.ApicUserKey,
+		ApicUserCrt:             c.Network.AciNetworkProvider.ApicUserCrt,
+		ApicRefreshTime:         refreshTime,
+		VmmDomain:               c.Network.AciNetworkProvider.VmmDomain,
+		VmmController:           c.Network.AciNetworkProvider.VmmController,
+		EncapType:               c.Network.AciNetworkProvider.EncapType,
+		McastRangeStart:         c.Network.AciNetworkProvider.McastRangeStart,
+		McastRangeEnd:           c.Network.AciNetworkProvider.McastRangeEnd,
+		NodeSubnet:              c.Network.AciNetworkProvider.NodeSubnet,
+		AEP:                     c.Network.AciNetworkProvider.AEP,
+		VRFName:                 c.Network.AciNetworkProvider.VRFName,
+		VRFTenant:               c.Network.AciNetworkProvider.VRFTenant,
+		L3Out:                   c.Network.AciNetworkProvider.L3Out,
+		L3OutExternalNetworks:   c.Network.AciNetworkProvider.L3OutExternalNetworks,
+		DynamicExternalSubnet:   c.Network.AciNetworkProvider.DynamicExternalSubnet,
+		StaticExternalSubnet:    c.Network.AciNetworkProvider.StaticExternalSubnet,
+		ServiceGraphSubnet:      c.Network.AciNetworkProvider.ServiceGraphSubnet,
+		KubeAPIVlan:             c.Network.AciNetworkProvider.KubeAPIVlan,
+		ServiceVlan:             c.Network.AciNetworkProvider.ServiceVlan,
+		InfraVlan:               c.Network.AciNetworkProvider.InfraVlan,
+		ImagePullPolicy:         c.Network.AciNetworkProvider.ImagePullPolicy,
+		ImagePullSecret:         c.Network.AciNetworkProvider.ImagePullSecret,
+		Tenant:                  c.Network.AciNetworkProvider.Tenant,
+		ServiceMonitorInterval:  serviceMonitorInterval,
+		PBRTrackingNonSnat:      c.Network.AciNetworkProvider.PBRTrackingNonSnat,
+		InstallIstio:            c.Network.AciNetworkProvider.InstallIstio,
+		IstioProfile:            c.Network.AciNetworkProvider.IstioProfile,
+		DropLogEnable:           c.Network.AciNetworkProvider.DropLogEnable,
+		ControllerLogLevel:      c.Network.AciNetworkProvider.ControllerLogLevel,
+		HostAgentLogLevel:       c.Network.AciNetworkProvider.HostAgentLogLevel,
+		OpflexAgentLogLevel:     c.Network.AciNetworkProvider.OpflexAgentLogLevel,
+		OVSMemoryLimit:          c.Network.AciNetworkProvider.OVSMemoryLimit,
+		ClusterCIDR:             c.ClusterCIDR,
+		StaticServiceIPStart:    cidr.Inc(cidr.Inc(staticServiceIPStart)),
+		StaticServiceIPEnd:      cidr.Dec(staticServiceIPEnd),
+		PodGateway:              cidr.Inc(podIPStart),
+		PodIPStart:              cidr.Inc(cidr.Inc(podIPStart)),
+		PodIPEnd:                cidr.Dec(podIPEnd),
+		NodeServiceIPStart:      cidr.Inc(cidr.Inc(nodeServiceIPStart)),
+		NodeServiceIPEnd:        cidr.Dec(nodeServiceIPEnd),
+		ServiceIPStart:          cidr.Inc(cidr.Inc(serviceIPStart)),
+		ServiceIPEnd:            cidr.Dec(serviceIPEnd),
+		AciCniDeployContainer:   c.SystemImages.AciCniDeployContainer,
+		AciHostContainer:        c.SystemImages.AciHostContainer,
+		AciOpflexContainer:      c.SystemImages.AciOpflexContainer,
+		AciMcastContainer:       c.SystemImages.AciMcastContainer,
+		AciOpenvSwitchContainer: c.SystemImages.AciOpenvSwitchContainer,
+		AciControllerContainer:  c.SystemImages.AciControllerContainer,
+		MTU:                     c.Network.MTU,
+	}
+
+	pluginYaml, err := c.getNetworkPluginManifest(AciConfig, data)
+	if err != nil {
+		return err
+	}
+	return c.doAddonDeploy(ctx, pluginYaml, NetworkPluginResourceName, true)
+}
+
 func (c *Cluster) getNetworkPluginManifest(pluginConfig, data map[string]interface{}) (string, error) {
 	switch c.Network.Plugin {
-	case CanalNetworkPlugin, FlannelNetworkPlugin, CalicoNetworkPlugin, WeaveNetworkPlugin:
+	case CanalNetworkPlugin, FlannelNetworkPlugin, CalicoNetworkPlugin, WeaveNetworkPlugin, AciNetworkPlugin:
 		tmplt, err := templates.GetVersionedTemplates(c.Network.Plugin, data, c.Version)
 		if err != nil {
 			return "", err

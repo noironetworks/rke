@@ -71,6 +71,17 @@ const (
 
 	DefaultCanalFlexVolPluginDirectory = "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds"
 
+	DefaultApicRefreshTime                           = 1200
+	DefaultOVSMemoryLimit                            = "1Gi"
+	DefaultImagePullPolicy                           = "Always"
+	DefaultServiceMonitorInterval                    = 0
+	DefaultPBRTrackingNonSnat                        = "false"
+	DefaultInstallIstio                              = "false"
+	DefaultIstioProfile                              = "demo"
+	DefaultDropLogEnable                             = "true"
+	DefaultControllerLogLevel                        = "info"
+	DefaultHostAgentLogLevel                         = "info"
+	DefaultOpflexAgentLogLevel                       = "info"
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
@@ -473,6 +484,13 @@ func (c *Cluster) setClusterImageDefaults() error {
 		&c.SystemImages.IngressBackend:            d(imageDefaults.IngressBackend, privRegURL),
 		&c.SystemImages.MetricsServer:             d(imageDefaults.MetricsServer, privRegURL),
 		&c.SystemImages.Nodelocal:                 d(imageDefaults.Nodelocal, privRegURL),
+		&c.SystemImages.AciCniDeployContainer:     d(imageDefaults.AciCniDeployContainer, privRegURL),
+		&c.SystemImages.AciHostContainer:          d(imageDefaults.AciHostContainer, privRegURL),
+		&c.SystemImages.AciOpflexContainer:        d(imageDefaults.AciOpflexContainer, privRegURL),
+		&c.SystemImages.AciMcastContainer:         d(imageDefaults.AciMcastContainer, privRegURL),
+		&c.SystemImages.AciOpenvSwitchContainer:   d(imageDefaults.AciOpenvSwitchContainer, privRegURL),
+		&c.SystemImages.AciControllerContainer:    d(imageDefaults.AciControllerContainer, privRegURL),
+
 		// this's a stopgap, we could drop this after https://github.com/kubernetes/kubernetes/pull/75618 merged
 		&c.SystemImages.WindowsPodInfraContainer: d(imageDefaults.WindowsPodInfraContainer, privRegURL),
 	}
@@ -554,6 +572,19 @@ func (c *Cluster) setClusterNetworkDefaults() {
 	}
 	if c.Network.WeaveNetworkProvider != nil {
 		networkPluginConfigDefaultsMap[WeavePassword] = c.Network.WeaveNetworkProvider.Password
+	}
+	if c.Network.AciNetworkProvider != nil {
+		/* All ACI options are defined under aci_network_provider and have no general network options.
+		   So using c.Network.Options is avoided */
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OVSMemoryLimit, DefaultOVSMemoryLimit)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.ImagePullPolicy, DefaultImagePullPolicy)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.PBRTrackingNonSnat, DefaultPBRTrackingNonSnat)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.InstallIstio, DefaultInstallIstio)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.IstioProfile, DefaultIstioProfile)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.DropLogEnable, DefaultDropLogEnable)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.ControllerLogLevel, DefaultControllerLogLevel)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.HostAgentLogLevel, DefaultHostAgentLogLevel)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentLogLevel, DefaultOpflexAgentLogLevel)
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
