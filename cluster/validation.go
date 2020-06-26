@@ -67,12 +67,58 @@ func validateAuthOptions(c *Cluster) error {
 	return nil
 }
 
+func transformAciNetworkOption(option string) string {
+	switch option {
+	case AciSystemIdentifier:
+		option = "system_id"
+	case AciServiceGraphSubnet:
+		option = "node_svc_subnet"
+	case AciStaticExternalSubnet:
+		option = "extern_static"
+	case AciDynamicExternalSubnet:
+		option = "extern_dynamic"
+	}
+	return option
+}
+
 func validateNetworkOptions(c *Cluster) error {
-	if c.Network.Plugin != NoNetworkPlugin && c.Network.Plugin != FlannelNetworkPlugin && c.Network.Plugin != CalicoNetworkPlugin && c.Network.Plugin != CanalNetworkPlugin && c.Network.Plugin != WeaveNetworkPlugin {
+	if c.Network.Plugin != NoNetworkPlugin && c.Network.Plugin != FlannelNetworkPlugin && c.Network.Plugin != CalicoNetworkPlugin && c.Network.Plugin != CanalNetworkPlugin && c.Network.Plugin != WeaveNetworkPlugin && c.Network.Plugin != AciNetworkPlugin {
 		return fmt.Errorf("Network plugin [%s] is not supported", c.Network.Plugin)
 	}
 	if c.Network.Plugin == FlannelNetworkPlugin && c.Network.MTU != 0 {
 		return fmt.Errorf("Network plugin [%s] does not support configuring MTU", FlannelNetworkPlugin)
+	}
+	if c.Network.Plugin == AciNetworkPlugin {
+		//Skipping Cloud options for now
+		networkOptionsList := []string{AciSystemIdentifier, AciToken, AciApicUserName, AciApicUserKey,
+			AciApicUserCrt, AciEncapType, AciMcastRangeStart, AciMcastRangeEnd,
+			AciNodeSubnet, AciAEP, AciVRFName, AciVRFTenant, AciL3Out, AciDynamicExternalSubnet,
+			AciStaticExternalSubnet, AciServiceGraphSubnet, AciKubeAPIVlan, AciServiceVlan, AciInfraVlan,
+			AciNodeSubnet, AciMcastRangeStart, AciMcastRangeEnd}
+		for _, v := range networkOptionsList {
+			val, ok := c.Network.Options[v]
+			if !ok || val == "" {
+				v = transformAciNetworkOption(v)
+				return fmt.Errorf("Network plugin aci: %s under aci_network_provider is not provided", strings.TrimPrefix(v, "aci_"))
+			}
+		}
+		if c.Network.AciNetworkProvider != nil {
+			if c.Network.AciNetworkProvider.ApicHosts == nil {
+				return fmt.Errorf("Network plugin aci: %s under aci_network_provider is not provided", "apic_hosts")
+			}
+			if c.Network.AciNetworkProvider.L3OutExternalNetworks == nil {
+				return fmt.Errorf("Network plugin aci: %s under aci_network_provider is not provided", "l3out_external_networks")
+			}
+		} else {
+			var requiredArgs []string
+			for _, v := range networkOptionsList {
+				v = transformAciNetworkOption(v)
+				requiredArgs = append(requiredArgs, fmt.Sprintf(" %s", strings.TrimPrefix("aci_", v)))
+			}
+			requiredArgs = append(requiredArgs, fmt.Sprintf(" %s", ApicHosts))
+			requiredArgs = append(requiredArgs, fmt.Sprintf(" %s", L3OutExternalNetworks))
+			return fmt.Errorf("Network plugin aci: multiple parameters under aci_network_provider are not provided: %s", requiredArgs)
+		}
 	}
 	return nil
 }
@@ -317,6 +363,28 @@ func validateNetworkImages(c *Cluster) error {
 		if len(c.SystemImages.WeaveNode) == 0 {
 			return errors.New("weave image is not populated")
 		}
+	} else if c.Network.Plugin == AciNetworkPlugin {
+		if len(c.SystemImages.AciCniDeployContainer) == 0 {
+			return errors.New("aci cnideploy image is not populated")
+		}
+		if len(c.SystemImages.AciHostContainer) == 0 {
+			return errors.New("aci host container image is not populated")
+		}
+		if len(c.SystemImages.AciOpflexContainer) == 0 {
+			return errors.New("aci opflex agent image is not populated")
+		}
+		if len(c.SystemImages.AciMcastContainer) == 0 {
+			return errors.New("aci mcast container image is not populated")
+		}
+		if len(c.SystemImages.AciOpenvSwitchContainer) == 0 {
+			return errors.New("aci openvswitch image is not populated")
+		}
+		if len(c.SystemImages.AciControllerContainer) == 0 {
+			return errors.New("aci controller image is not populated")
+		}
+		//Skipping Cloud images for now
+		//c.SystemImages.AciOpflexServerContainer
+		//c.SystemImages.AciGbpServerContainer
 	}
 	return nil
 }
