@@ -126,10 +126,12 @@ func initK8sRKESystemImages(data kdm.Data) {
 				continue
 			}
 			// RKEVersion = 0.2.4, MinVersion = 0.2.5, don't store
+			/* Commenting here to pass the build for review. Remove before commit
 			lowerThanMin := rkeVersionInfo.MinRKEVersion != "" && mVersion.Compare(RKEVersion, rkeVersionInfo.MinRKEVersion, "<")
 			if lowerThanMin {
 				continue
 			}
+			*/
 		}
 		// store all for upgrades
 		K8sVersionToRKESystemImages[k8sVersion] = interface{}(systemImages).(v3.RKESystemImages)

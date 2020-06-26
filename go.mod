@@ -4,6 +4,7 @@ go 1.13
 
 replace (
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20190514055449-b30ab9de040e
+	github.com/rancher/types => github.com/noironetworks/types v0.0.0-20200715032919-5ed5d03b8e24
 	golang.org/x/sys => golang.org/x/sys v0.0.0-20190830141801-acfa387b8d69
 	k8s.io/client-go => k8s.io/client-go v0.18.0
 )
@@ -11,6 +12,7 @@ replace (
 require (
 	github.com/Masterminds/sprig/v3 v3.0.0
 	github.com/Microsoft/hcsshim v0.8.9 // indirect
+	github.com/apparentlymart/go-cidr v1.0.1
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/containerd/continuity v0.0.0-20200710164510-efbc4488d8fe // indirect
 	github.com/coreos/bbolt v1.3.1-coreos.6 // indirect
