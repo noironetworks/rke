@@ -68,7 +68,9 @@ func StartUpDindContainer(ctx context.Context, dindAddress, dindNetwork, dindSto
 					"dockerd-entrypoint.sh --storage-driver=" + storageDriver,
 			},
 			Hostname: dindAddress,
-			Env:      []string{"DOCKER_TLS_CERTDIR="},
+			Env: []string{"DOCKER_TLS_CERTDIR=", "HTTPS_PROXY=http://proxy.esl.cisco.com:80",
+				"HTTP_PROXY=http://proxy.esl.cisco.com:80",
+				"NO_PROXY=0.0.0.0,127.0.0.1"},
 		}
 		hostCfg := &container.HostConfig{
 			Privileged: true,
