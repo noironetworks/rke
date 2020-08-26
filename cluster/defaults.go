@@ -71,17 +71,33 @@ const (
 
 	DefaultCanalFlexVolPluginDirectory = "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds"
 
-	DefaultApicRefreshTime                           = 1200
-	DefaultOVSMemoryLimit                            = "1Gi"
-	DefaultImagePullPolicy                           = "Always"
-	DefaultServiceMonitorInterval                    = 0
-	DefaultPBRTrackingNonSnat                        = "false"
-	DefaultInstallIstio                              = "false"
-	DefaultIstioProfile                              = "demo"
-	DefaultDropLogEnable                             = "true"
-	DefaultControllerLogLevel                        = "info"
-	DefaultHostAgentLogLevel                         = "info"
-	DefaultOpflexAgentLogLevel                       = "info"
+	DefaultApicRefreshTime          = 1200
+	DefaultOVSMemoryLimit           = "1Gi"
+	DefaultImagePullPolicy          = "Always"
+	DefaultServiceMonitorInterval   = 0
+	DefaultPBRTrackingNonSnat       = "false"
+	DefaultInstallIstio             = "false"
+	DefaultIstioProfile             = "demo"
+	DefaultDropLogEnable            = "true"
+	DefaultControllerLogLevel       = "info"
+	DefaultHostAgentLogLevel        = "info"
+	DefaultOpflexAgentLogLevel      = "info"
+	DefaultUseAciCniPriorityClass   = "false"
+	DefaultNoPriorityClass          = "false"
+	DefaultMaxNodesSvcGraph         = "32"
+	DefaultSnatContractScope        = "global"
+	DefaultSnatNamespace            = "aci-containers-system"
+	DefaultCApic                    = "false"
+	DefaultPodSubnetChunkSize       = "32"
+	DefaultSnatPortRangeStart       = "5000"
+	DefaultSnatPortRangeEnd         = "65000"
+	DefaultSnatPortsPerNode         = "3000"
+	DefaultUseHostNetnsVolume       = "false"
+	DefaultRunGbpContainer          = "false"
+	DefaultRunOpflexServerContainer = "false"
+	DefaultUseAciAnywhereCRD        = "false"
+	DefaultEnableEndpointSlice      = "false"
+
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
@@ -490,6 +506,8 @@ func (c *Cluster) setClusterImageDefaults() error {
 		&c.SystemImages.AciMcastContainer:         d(imageDefaults.AciMcastContainer, privRegURL),
 		&c.SystemImages.AciOpenvSwitchContainer:   d(imageDefaults.AciOpenvSwitchContainer, privRegURL),
 		&c.SystemImages.AciControllerContainer:    d(imageDefaults.AciControllerContainer, privRegURL),
+		&c.SystemImages.AciOpflexServerContainer:  d(imageDefaults.AciOpflexServerContainer, privRegURL),
+		&c.SystemImages.AciGbpServerContainer:     d(imageDefaults.AciGbpServerContainer, privRegURL),
 
 		// this's a stopgap, we could drop this after https://github.com/kubernetes/kubernetes/pull/75618 merged
 		&c.SystemImages.WindowsPodInfraContainer: d(imageDefaults.WindowsPodInfraContainer, privRegURL),
@@ -585,6 +603,22 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.ControllerLogLevel, DefaultControllerLogLevel)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.HostAgentLogLevel, DefaultHostAgentLogLevel)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentLogLevel, DefaultOpflexAgentLogLevel)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAciCniPriorityClass, DefaultUseAciCniPriorityClass)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.NoPriorityClass, DefaultNoPriorityClass)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.MaxNodesSvcGraph, DefaultMaxNodesSvcGraph)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SnatContractScope, DefaultSnatContractScope)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.PodSubnetChunkSize, DefaultPodSubnetChunkSize)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.EnableEndpointSlice, DefaultEnableEndpointSlice)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SnatNamespace, DefaultSnatNamespace)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SnatPortRangeStart, DefaultSnatPortRangeStart)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SnatPortRangeEnd, DefaultSnatPortRangeEnd)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SnatPortsPerNode, DefaultSnatPortsPerNode)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseHostNetnsVolume, DefaultUseHostNetnsVolume)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.CApic, DefaultCApic)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAciAnywhereCRD, DefaultUseAciAnywhereCRD)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunGbpContainer, DefaultRunGbpContainer)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunOpflexServerContainer, DefaultRunOpflexServerContainer)
+
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
