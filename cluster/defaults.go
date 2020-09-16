@@ -100,6 +100,8 @@ const (
 	DefaultAciOpflexClientSSL          = "true"
 	DefaultAciUsePrivilegedContainer   = "false"
 	DefaultAciUseOpflexServerVolume    = "false"
+	DefaultAciOpflexServerPort         = "8009"
+	DefaultAciStandAlone               = "false"
 
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
@@ -611,6 +613,8 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciUseAciAnywhereCRD:        DefaultAciUseAciAnywhereCRD,
 			AciRunGbpContainer:          DefaultAciRunGbpContainer,
 			AciRunOpflexServerContainer: DefaultAciRunOpflexServerContainer,
+			AciOpflexServerPort:         DefaultAciOpflexServerPort,
+			AciStandAlone:               DefaultAciStandAlone,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -656,6 +660,8 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAciAnywhereCRD, DefaultAciUseAciAnywhereCRD)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunGbpContainer, DefaultAciRunGbpContainer)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunOpflexServerContainer, DefaultAciRunOpflexServerContainer)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexServerPort, DefaultAciOpflexServerPort)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.StandAlone, DefaultAciStandAlone)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
 		networkPluginConfigDefaultsMap[AciPBRTrackingNonSnat] = c.Network.AciNetworkProvider.PBRTrackingNonSnat
@@ -684,6 +690,9 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciUseAciAnywhereCRD] = c.Network.AciNetworkProvider.UseAciAnywhereCRD
 		networkPluginConfigDefaultsMap[AciRunGbpContainer] = c.Network.AciNetworkProvider.RunGbpContainer
 		networkPluginConfigDefaultsMap[AciRunOpflexServerContainer] = c.Network.AciNetworkProvider.RunOpflexServerContainer
+		networkPluginConfigDefaultsMap[AciGbpPodSubnet] = c.Network.AciNetworkProvider.GbpPodSubnet
+		networkPluginConfigDefaultsMap[AciOverlayVRFName] = c.Network.AciNetworkProvider.OverlayVRFName
+		networkPluginConfigDefaultsMap[AciStandAlone] = c.Network.AciNetworkProvider.StandAlone
 		networkPluginConfigDefaultsMap[AciSystemIdentifier] = c.Network.AciNetworkProvider.SystemIdentifier
 		networkPluginConfigDefaultsMap[AciToken] = c.Network.AciNetworkProvider.Token
 		networkPluginConfigDefaultsMap[AciApicUserName] = c.Network.AciNetworkProvider.ApicUserName
@@ -712,6 +721,8 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciKafkaClientCrt] = c.Network.AciNetworkProvider.KafkaClientCrt
 		networkPluginConfigDefaultsMap[AciKafkaClientKey] = c.Network.AciNetworkProvider.KafkaClientKey
 		networkPluginConfigDefaultsMap[AciSubnetDomainName] = c.Network.AciNetworkProvider.SubnetDomainName
+		networkPluginConfigDefaultsMap[AciOpflexMode] = c.Network.AciNetworkProvider.OpflexMode
+		networkPluginConfigDefaultsMap[AciEpRegistry] = c.Network.AciNetworkProvider.EpRegistry
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
