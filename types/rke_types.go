@@ -189,6 +189,8 @@ type RKESystemImages struct {
 	AciGbpServerContainer string `yaml:"aci_gbp_server_container" json:"aciGbpServerContainer,omitempty"`
 	// Opflex Server container image for Cisco ACI
 	AciOpflexServerContainer string `yaml:"aci_opflex_server_container" json:"aciOpflexServerContainer,omitempty"`
+	// GBP Server init container image for Cisco ACI
+	AciGbpServerInitContainer string `yaml:"aci_gbp_server_init_container" json:"aciGbpServerInitContainer,omitempty"`
 }
 
 type RKEConfigNode struct {
@@ -634,6 +636,8 @@ type AciNetworkProvider struct {
 	RunGbpContainer          string   `yaml:"run_gbp_container,omitempty" json:"runGbpContainer,omitempty"`
 	RunOpflexServerContainer string   `yaml:"run_opflex_server_container,omitempty" json:"runOpflexServerContainer,omitempty"`
 	OpflexServerPort         string   `yaml:"opflex_server_port,omitempty" json:"opflexServerPort,omitempty"`
+	DisableMultus            string   `yaml:"disable_multus,omitempty" json:"disableMultus,omitempty"`
+	CsrList                  []string `yaml:"csr_list,omitempty" json:"csrList,omitempty"`
 }
 
 type KubernetesServicesOptions struct {

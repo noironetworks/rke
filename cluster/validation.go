@@ -190,6 +190,11 @@ func validateAciCloudOptionsDisabled(option string, value string) (string, strin
 			ok = true
 		}
 		description = "Opflex server port"
+	case AciCsrList:
+		if value == "" {
+			ok = true
+		}
+		description = "CSR list"
 	}
 	return option, description, ok
 }
@@ -205,7 +210,7 @@ func validateNetworkOptions(c *Cluster) error {
 		//Skip cloud options and throw an error.
 		cloudOptionsList := []string{AciEpRegistry, AciOpflexMode, AciUseHostNetnsVolume, AciUseOpflexServerVolume,
 			AciSubnetDomainName, AciKafkaClientCrt, AciKafkaClientKey, AciCApic, UseAciAnywhereCRD,
-			AciOverlayVRFName, AciGbpPodSubnet, AciRunGbpContainer, AciRunOpflexServerContainer, AciOpflexServerPort}
+			AciOverlayVRFName, AciGbpPodSubnet, AciRunGbpContainer, AciRunOpflexServerContainer, AciOpflexServerPort, AciCsrList}
 		for _, v := range cloudOptionsList {
 			val, ok := c.Network.Options[v]
 			_, _, disabled := validateAciCloudOptionsDisabled(v, val)
@@ -528,6 +533,7 @@ func validateNetworkImages(c *Cluster) error {
 		//Skipping Cloud image validation.
 		//c.SystemImages.AciOpflexServerContainer
 		//c.SystemImages.AciGbpServerContainer
+		//c.SystemImages.AciGbpServerInitContainer
 	}
 	return nil
 }

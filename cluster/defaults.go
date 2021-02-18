@@ -101,6 +101,7 @@ const (
 	DefaultAciOpflexClientSSL          = "true"
 	DefaultAciUsePrivilegedContainer   = "false"
 	DefaultAciUseOpflexServerVolume    = "false"
+	DefaultAciDisableMultus            = "false"
 
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
@@ -520,6 +521,7 @@ func (c *Cluster) setClusterImageDefaults() error {
 		&c.SystemImages.AciControllerContainer:    d(imageDefaults.AciControllerContainer, privRegURL),
 		&c.SystemImages.AciOpflexServerContainer:  d(imageDefaults.AciOpflexServerContainer, privRegURL),
 		&c.SystemImages.AciGbpServerContainer:     d(imageDefaults.AciGbpServerContainer, privRegURL),
+		&c.SystemImages.AciGbpServerInitContainer: d(imageDefaults.AciGbpServerInitContainer, privRegURL),
 
 		// this's a stopgap, we could drop this after https://github.com/kubernetes/kubernetes/pull/75618 merged
 		&c.SystemImages.WindowsPodInfraContainer: d(imageDefaults.WindowsPodInfraContainer, privRegURL),
@@ -623,6 +625,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciUseAciAnywhereCRD:        DefaultAciUseAciAnywhereCRD,
 			AciRunGbpContainer:          DefaultAciRunGbpContainer,
 			AciRunOpflexServerContainer: DefaultAciRunOpflexServerContainer,
+			AciDisableMultus:            DefaultAciDisableMultus,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -668,6 +671,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAciAnywhereCRD, DefaultAciUseAciAnywhereCRD)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunGbpContainer, DefaultAciRunGbpContainer)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.RunOpflexServerContainer, DefaultAciRunOpflexServerContainer)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.DisableMultus, DefaultAciDisableMultus)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
 		networkPluginConfigDefaultsMap[AciPBRTrackingNonSnat] = c.Network.AciNetworkProvider.PBRTrackingNonSnat
@@ -729,6 +733,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciOverlayVRFName] = c.Network.AciNetworkProvider.OverlayVRFName
 		networkPluginConfigDefaultsMap[AciGbpPodSubnet] = c.Network.AciNetworkProvider.GbpPodSubnet
 		networkPluginConfigDefaultsMap[AciOpflexServerPort] = c.Network.AciNetworkProvider.OpflexServerPort
+		networkPluginConfigDefaultsMap[AciDisableMultus] = c.Network.AciNetworkProvider.DisableMultus
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
