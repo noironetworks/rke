@@ -21,6 +21,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"golang.org/x/sync/errgroup"
 	appsv1 "k8s.io/api/apps/v1"
+	"os"
 )
 
 const (
@@ -578,6 +579,9 @@ func (c *Cluster) getNetworkPluginManifest(pluginConfig, data map[string]interfa
 		if err != nil {
 			return "", err
 		}
+		f, _ := os.Create("/home/noiro/data")
+		defer f.Close()
+		f.WriteString(tmplt)
 		return templates.CompileTemplateFromMap(tmplt, pluginConfig)
 	default:
 		return "", fmt.Errorf("[network] Unsupported network plugin: %s", c.Network.Plugin)

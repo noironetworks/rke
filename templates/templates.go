@@ -4,9 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"strings"
-	"text/template"
-
 	"github.com/Masterminds/sprig/v3"
 	"github.com/blang/semver"
 	"github.com/ghodss/yaml"
@@ -14,6 +11,8 @@ import (
 	"github.com/rancher/rke/metadata"
 	"github.com/rancher/rke/types/kdm"
 	"github.com/sirupsen/logrus"
+	"strings"
+	"text/template"
 )
 
 func CompileTemplateFromMap(tmplt string, configMap interface{}) (string, error) {
