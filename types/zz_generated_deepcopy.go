@@ -71,6 +71,11 @@ func (in *AciNetworkProvider) DeepCopyInto(out *AciNetworkProvider) {
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}
+	if in.CsrList != nil {
+		in, out := &in.CsrList, &out.CsrList
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 
