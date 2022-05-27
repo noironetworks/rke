@@ -181,6 +181,10 @@ type RKESystemImages struct {
 	MetricsServer string `yaml:"metrics_server" json:"metricsServer,omitempty"`
 	// Pod infra container image for Windows
 	WindowsPodInfraContainer string `yaml:"windows_pod_infra_container" json:"windowsPodInfraContainer,omitempty"`
+	//Provision operator image for Cisco ACI
+	AciProvisionOperatorContainer string `yaml:"aci_provision_operator_container" json:"aciProvisionOperatorContainer,omitempty"`
+	//Container operator image for Cisco ACI
+	AciContainersOperatorContainer string `yaml:"aci_containers_operator_container" json:"aciContainersOperatorContainer,omitempty"`
 	// Cni deployer container image for Cisco ACI
 	AciCniDeployContainer string `yaml:"aci_cni_deploy_container" json:"aciCniDeployContainer,omitempty"`
 	// host container image for Cisco ACI

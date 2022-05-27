@@ -78,10 +78,15 @@ const (
 	AciNetworkPlugin            = "aci"
 	AciOVSMemoryLimit           = "aci_ovs_memory_limit"
 	AciImagePullPolicy          = "aci_image_pull_policy"
+	AciImagePrefix              = "image_prefix"
+	AciCniOperatorVersion       = "aci_cni_operator_version"
 	AciPBRTrackingNonSnat       = "aci_pbr_tracking_non_snat"
 	AciInstallIstio             = "aci_install_istio"
 	AciIstioProfile             = "aci_istio_profile"
 	AciDropLogEnable            = "aci_drop_log_enable"
+	AciSrioEnable               = "aci_sriov_enable"
+	AciNodepodifEnable          = "aci_nodepodif_enable"
+	AciMultusDisable            = "aci_multus_disable"
 	AciControllerLogLevel       = "aci_controller_log_level"
 	AciHostAgentLogLevel        = "aci_host_agent_log_level"
 	AciOpflexAgentLogLevel      = "aci_opflex_agent_log_level"
@@ -92,6 +97,7 @@ const (
 	AciApicUserName             = "aci_apic_user_name"
 	AciApicUserKey              = "aci_apic_user_key"
 	AciApicUserCrt              = "aci_apic_user_crt"
+	AciApicCertReused           = "aci_apic_cert_reused" 
 	AciVmmDomain                = "aci_vmm_domain"
 	AciVmmController            = "aci_vmm_controller"
 	AciEncapType                = "aci_encap_type"
@@ -117,8 +123,12 @@ const (
 	AciPodSubnetChunkSize       = "aci_pod_subnet_chunk_size"
 	AciEnableEndpointSlice      = "aci_enable_endpoint_slice"
 	AciSnatNamespace            = "aci_snat_namespace"
+	AciDisablePeriodicSnatGlobalInfoSync = "aci_disable_periodic_snat_global_info_sync"
 	AciEpRegistry               = "aci_ep_registry"
 	AciOpflexMode               = "aci_opflex_mode"
+	AciGenerateInstallerFiles   = "aci_generate_installer_files"
+	AciGenerateCnetFile         = "aci_generate_cnet_file"
+	AciGenerateApicFile         = "aci_generate_apic_file"
 	AciSnatPortRangeStart       = "aci_snat_port_range_start"
 	AciSnatPortRangeEnd         = "aci_snat_port_range_end"
 	AciSnatPortsPerNode         = "aci_snat_ports_per_node"
@@ -136,6 +146,24 @@ const (
 	AciRunGbpContainer          = "aci_run_gbp_container"
 	AciRunOpflexServerContainer = "aci_run_opflex_server_container"
 	AciOpflexServerPort         = "aci_opflex_server_port"
+	AciApicSubscriptionDelay    = "aci_apic_subscription_delay"
+	AciApicRefreshtickerAdjust  = "aci_apic_refreshticker_adjust"
+	AciOpflexDeviceDeleteTimeout = "aci_opflex_device_delete_timeout"
+	AciEnableUpdates			= "aci_enable_updates"
+	AciNodeSvcSubnet			= "aci_node_svc_subnet"
+	AciDisableWaitForNetwork    = "aci_disable_wait_for_network"
+	AciDurationWaitForNetwork   = "aci_duration_wait_for_network"
+	AciPodSubnet				= "aci_pod_subnet"
+	AciWatchNamespace			= "aci_watch_namespace"
+	AciUseAppsApi				= "aci_use_apps_api"
+	AciKubeConfigController		= "aci_kube_config_controller"
+	AciFlavor					= "aci_flavor"
+	AciUseCnideployInitcontainer = "aci_use_cnideploy_initcontainer"
+	AciSnatGlobalInfo           = "aci_globalinfo_name"
+	AciSnatOperatorName         = "aci_snat_operator_name"
+	AciUseClusterRole           = "aci_use_cluster_role"
+	AciHostAgentOpenshiftResource = "aci_host_agent_openshift_resource"
+
 	// List of map keys to be used with network templates
 
 	// EtcdEndpoints is the server address for Etcd, used by calico
@@ -189,6 +217,7 @@ const (
 	ApicUserName                           = "ApicUserName"
 	ApicUserKey                            = "ApicUserKey"
 	ApicUserCrt                            = "ApicUserCrt"
+	ApicCertReused                         = "ApicCertReused"
 	ApicRefreshTime                        = "ApicRefreshTime"
 	VmmDomain                              = "VmmDomain"
 	VmmController                          = "VmmController"
@@ -207,6 +236,8 @@ const (
 	ServiceVlan                            = "ServiceVlan"
 	InfraVlan                              = "InfraVlan"
 	ImagePullPolicy                        = "ImagePullPolicy"
+	ImagePrefix                            = "ImagePrefix"
+	CniOperatorVersion                     = "CniOperatorVersion"
 	ImagePullSecret                        = "ImagePullSecret"
 	Tenant                                 = "Tenant"
 	ServiceMonitorInterval                 = "ServiceMonitorInterval"
@@ -214,6 +245,9 @@ const (
 	InstallIstio                           = "InstallIstio"
 	IstioProfile                           = "IstioProfile"
 	DropLogEnable                          = "DropLogEnable"
+	SrioEnable                             = "SrioEnable"
+	NodepodifEnable                        = "NodepodifEnable"
+	MultusDisable                          = "MultusDisable"
 	ControllerLogLevel                     = "ControllerLogLevel"
 	HostAgentLogLevel                      = "HostAgentLogLevel"
 	OpflexAgentLogLevel                    = "OpflexAgentLogLevel"
@@ -225,6 +259,8 @@ const (
 	AciControllerContainer                 = "AciControllerContainer"
 	AciGbpServerContainer                  = "AciGbpServerContainer"
 	AciOpflexServerContainer               = "AciOpflexServerContainer"
+	AciContainersOperatorContainer         = "AciContainersOperatorContainer"
+	AciProvisionOperatorContainer          = "AciProvisionOperatorContainer"
 	StaticServiceIPStart                   = "StaticServiceIPStart"
 	StaticServiceIPEnd                     = "StaticServiceIPEnd"
 	PodGateway                             = "PodGateway"
@@ -241,8 +277,12 @@ const (
 	PodSubnetChunkSize                     = "PodSubnetChunkSize"
 	EnableEndpointSlice                    = "EnableEndpointSlice"
 	SnatNamespace                          = "SnatNamespace"
+	DisablePeriodicSnatGlobalInfoSync      = "DisablePeriodicSnatGlobalInfoSync"
 	EpRegistry                             = "EpRegistry"
 	OpflexMode                             = "OpflexMode"
+	GenerateInstallerFiles                 = "GenerateInstallerFiles"
+	GenerateCnetFile                       = "GenerateCnetFile"
+	GenerateApicFile                       = "GenerateApicFile"
 	SnatPortRangeStart                     = "SnatPortRangeStart"
 	SnatPortRangeEnd                       = "SnatPortRangeEnd"
 	SnatPortsPerNode                       = "SnatPortsPerNode"
@@ -266,6 +306,24 @@ const (
 	NodeSelector                           = "NodeSelector"
 	UpdateStrategy                         = "UpdateStrategy"
 	Tolerations                            = "Tolerations"
+	ApicSubscriptionDelay				   = "ApicSubscriptionDelay"
+	ApicRefreshtickerAdjust				   = "ApicRefreshtickerAdjust"
+	OpflexDeviceDeleteTimeout			   = "OpflexDeviceDeleteTimeout"
+	EnableUpdates						   = "EnableUpdates"
+	MTUHeadroom							   = "MTUHeadroom"
+	NodeSvcSubnet						   = "NodeSvcSubnet"
+	DisableWaitForNetwork				   = "DisableWaitForNetwork"
+	DurationWaitForNetwork				   = "DurationWaitForNetwork"
+	PodSubnet							   = "PodSubnet"
+	WatchNamespace						   = "WatchNamespace"
+	UseAppsApi							   = "UseAppsApi"
+	KubeConfigController				   = "KubeConfigController"
+	Flavor								   = "Flavor"
+	UseCnideployInitcontainer			   = "UseCnideployInitcontainer"
+	SnatGlobalInfo                         = "SnatGlobalInfo"
+	SnatOperatorName                       = "SnatOperatorName"
+	UseClusterRole                         = "UseClusterRole"
+	HostAgentOpenshiftResource             = "HostAgentOpenshiftResource"
 )
 
 var EtcdPortList = []string{
@@ -479,6 +537,7 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		ApicUserName:             c.Network.Options[AciApicUserName],
 		ApicUserKey:              c.Network.Options[AciApicUserKey],
 		ApicUserCrt:              c.Network.Options[AciApicUserCrt],
+		ApicCertReused:           c.Network.Options[AciApicCertReused],
 		ApicRefreshTime:          c.Network.Options[AciApicRefreshTime],
 		VmmDomain:                c.Network.Options[AciVmmDomain],
 		VmmController:            c.Network.Options[AciVmmController],
@@ -498,6 +557,8 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		ServiceVlan:              c.Network.Options[AciServiceVlan],
 		InfraVlan:                c.Network.Options[AciInfraVlan],
 		ImagePullPolicy:          c.Network.Options[AciImagePullPolicy],
+		ImagePrefix:              c.Network.Options[AciImagePrefix],
+		CniOperatorVersion:       c.Network.Options[AciCniOperatorVersion],
 		ImagePullSecret:          c.Network.Options[AciImagePullSecret],
 		Tenant:                   c.Network.Options[AciTenant],
 		ServiceMonitorInterval:   c.Network.Options[AciServiceMonitorInterval],
@@ -505,6 +566,9 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		InstallIstio:             c.Network.Options[AciInstallIstio],
 		IstioProfile:             c.Network.Options[AciIstioProfile],
 		DropLogEnable:            c.Network.Options[AciDropLogEnable],
+		SrioEnable:               c.Network.Options[AciSrioEnable],
+		NodepodifEnable           c.Network.Options[AciNodepodifEnable],
+		MultusDisable             c.Network.Options[AciMultusDisable],
 		ControllerLogLevel:       c.Network.Options[AciControllerLogLevel],
 		HostAgentLogLevel:        c.Network.Options[AciHostAgentLogLevel],
 		OpflexAgentLogLevel:      c.Network.Options[AciOpflexAgentLogLevel],
@@ -526,8 +590,12 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		PodSubnetChunkSize:       c.Network.Options[AciPodSubnetChunkSize],
 		EnableEndpointSlice:      c.Network.Options[AciEnableEndpointSlice],
 		SnatNamespace:            c.Network.Options[AciSnatNamespace],
+		DisablePeriodicSnatGlobalInfoSync: c.Network.Options[AciDisablePeriodicSnatGlobalInfoSync],
 		EpRegistry:               c.Network.Options[AciEpRegistry],
 		OpflexMode:               c.Network.Options[AciOpflexMode],
+		GenerateInstallerFiles:   c.Network.Options[AciGenerateInstallerFiles],
+		GenerateCnetFile:         c.Network.Options[AciGenerateCnetFile], 
+		GenerateApicFile:         c.Network.Options[AciGenerateApicFile],
 		SnatPortRangeStart:       c.Network.Options[AciSnatPortRangeStart],
 		SnatPortRangeEnd:         c.Network.Options[AciSnatPortRangeEnd],
 		SnatPortsPerNode:         c.Network.Options[AciSnatPortsPerNode],
@@ -546,6 +614,10 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		RunGbpContainer:          c.Network.Options[AciRunGbpContainer],
 		RunOpflexServerContainer: c.Network.Options[AciRunOpflexServerContainer],
 		OpflexServerPort:         c.Network.Options[AciOpflexServerPort],
+		SnatGlobalInfo:           c.Network.Options[AciSnatGlobalInfo],
+		SnatOperatorName:         c.Network.Options[AciSnatOperatorName],
+		UseClusterRole:           c.Network.Options[AciUseClusterRole],
+		HostAgentOpenshiftResource: c.Network.Options[AciHostAgentOpenshiftResource],
 		AciCniDeployContainer:    c.SystemImages.AciCniDeployContainer,
 		AciHostContainer:         c.SystemImages.AciHostContainer,
 		AciOpflexContainer:       c.SystemImages.AciOpflexContainer,
@@ -554,7 +626,23 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		AciControllerContainer:   c.SystemImages.AciControllerContainer,
 		AciGbpServerContainer:    c.SystemImages.AciGbpServerContainer,
 		AciOpflexServerContainer: c.SystemImages.AciOpflexServerContainer,
+		AciProvisionOperatorContainer: c.SystemImages.AciProvisionOperatorContainer,
+		AciContainersOperatorContainer: c.SystemImages.AciContainersOperatorContainer
 		MTU:                      c.Network.MTU,
+		MTUHeadroom:			  c.Network.MTUHeadroom,
+		ApicSubscriptionDelay:    c.Network.Options[AciApicSubscriptionDelay],
+		ApicRefreshtickerAdjust:  c.Network.Options[AciApicRefreshtickerAdjust],
+		OpflexDeviceDeleteTimeout:    c.Network.Options[AciOpflexDeviceDeleteTimeout],
+		EnableUpdates: 			  c.Network.Options[AciEnableUpdates],
+		NodeSvcSubnet:			  c.Network.Options[NodeSvcSubnet],
+	    DisableWaitForNetwork:	  c.Network.Options[DisableWaitForNetwork],
+	    DurationWaitForNetwork:	  c.Network.Options[DurationWaitForNetwork],
+	    PodSubnet:				  c.Network.Options[PodSubnet],
+		WatchNamespace:			  c.Network.Options[WatchNamespace],
+		UseAppsApi:				  c.Network.Options[UseAppsApi],
+		KubeConfigController:	  c.Network.Options[KubeConfigController],
+		Flavor:	  				  c.Network.Options[Flavor],
+		UseCnideployInitcontainer: c.Network.Options[UseCnideployInitcontainer],
 	}
 
 	pluginYaml, err := c.getNetworkPluginManifest(AciConfig, data)
