@@ -84,7 +84,7 @@ const (
 	AciInstallIstio             = "aci_install_istio"
 	AciIstioProfile             = "aci_istio_profile"
 	AciDropLogEnable            = "aci_drop_log_enable"
-	AciSrioEnable               = "aci_sriov_enable"
+	AciSrioEnable               = "aci_srio_enable"
 	AciNodepodifEnable          = "aci_nodepodif_enable"
 	AciMultusDisable            = "aci_multus_disable"
 	AciControllerLogLevel       = "aci_controller_log_level"
@@ -163,6 +163,7 @@ const (
 	AciSnatOperatorName         = "aci_snat_operator_name"
 	AciUseClusterRole           = "aci_use_cluster_role"
 	AciHostAgentOpenshiftResource = "aci_host_agent_openshift_resource"
+	AciMTUHeadroom		    =  "aci_mtu_headroom"
 
 	// List of map keys to be used with network templates
 
@@ -567,8 +568,8 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		IstioProfile:             c.Network.Options[AciIstioProfile],
 		DropLogEnable:            c.Network.Options[AciDropLogEnable],
 		SrioEnable:               c.Network.Options[AciSrioEnable],
-		NodepodifEnable           c.Network.Options[AciNodepodifEnable],
-		MultusDisable             c.Network.Options[AciMultusDisable],
+		NodepodifEnable:          c.Network.Options[AciNodepodifEnable],
+		MultusDisable:            c.Network.Options[AciMultusDisable],
 		ControllerLogLevel:       c.Network.Options[AciControllerLogLevel],
 		HostAgentLogLevel:        c.Network.Options[AciHostAgentLogLevel],
 		OpflexAgentLogLevel:      c.Network.Options[AciOpflexAgentLogLevel],
@@ -627,9 +628,9 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		AciGbpServerContainer:    c.SystemImages.AciGbpServerContainer,
 		AciOpflexServerContainer: c.SystemImages.AciOpflexServerContainer,
 		AciProvisionOperatorContainer: c.SystemImages.AciProvisionOperatorContainer,
-		AciContainersOperatorContainer: c.SystemImages.AciContainersOperatorContainer
+		AciContainersOperatorContainer: c.SystemImages.AciContainersOperatorContainer,
 		MTU:                      c.Network.MTU,
-		MTUHeadroom:			  c.Network.MTUHeadroom,
+		MTUHeadroom:			  c.Network.Options[AciMTUHeadroom],
 		ApicSubscriptionDelay:    c.Network.Options[AciApicSubscriptionDelay],
 		ApicRefreshtickerAdjust:  c.Network.Options[AciApicRefreshtickerAdjust],
 		OpflexDeviceDeleteTimeout:    c.Network.Options[AciOpflexDeviceDeleteTimeout],

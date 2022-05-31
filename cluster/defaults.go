@@ -630,8 +630,8 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap = map[string]string{
 			AciOVSMemoryLimit:           DefaultAciOVSMemoryLimit,
 			AciImagePullPolicy:          DefaultAciImagePullPolicy,
-			AciImagePrefix:              DefaultAciImagePrefix
-			AciCniOperatorVersion:       DefaultAciCniOperatorVersion
+			AciImagePrefix:              DefaultAciImagePrefix,
+			AciCniOperatorVersion:       DefaultAciCniOperatorVersion,
 			AciPBRTrackingNonSnat:       DefaultAciPBRTrackingNonSnat,
 			AciInstallIstio:             DefaultAciInstallIstio,
 			AciIstioProfile:             DefaultAciIstioProfile,
@@ -648,7 +648,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciPodSubnetChunkSize:       DefaultAciPodSubnetChunkSize,
 			AciEnableEndpointSlice:      DefaultAciEnableEndpointSlice,
 			AciSnatNamespace:            DefaultAciSnatNamespace,
-			DisablePeriodicSnatGlobalInfoSync: DefaultAciDisablePeriodicSnatGlobalInfoSync
+			DisablePeriodicSnatGlobalInfoSync: DefaultAciDisablePeriodicSnatGlobalInfoSync,
 			AciSnatPortRangeStart:       DefaultAciSnatPortRangeStart,
 			AciSnatPortRangeEnd:         DefaultAciSnatPortRangeEnd,
 			AciSnatPortsPerNode:         DefaultAciSnatPortsPerNode,
@@ -677,13 +677,13 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciSrioEnable:               DefaultAciSrioEnable,
 	        AciNodepodifEnable:          DefaultAciNodepodifEnable,
 			AciMultusDisable:            DefaultAciMultusDisable,
-			AciGenerateInstallerFiles:   DefaultAciGenerateInstallerFiles
-			AciGenerateCnetFile:         DefaultAciGenerateCnetFile
-			AciGenerateApicFile:         DefaultAciGenerateApicFile
-			AciSnatGlobalInfo:           DefaultAciSnatGlobalInfo 
-			AciSnatOperatorName:          DefaultAciSnatOperatorName
-			AciUseClusterRole:            DefaultAciUseClusterRole
-			AciHostAgentOpenshiftResource: DefaultAciHostAgentOpenshiftResource                   
+			AciGenerateInstallerFiles:   DefaultAciGenerateInstallerFiles,
+			AciGenerateCnetFile:         DefaultAciGenerateCnetFile,
+			AciGenerateApicFile:         DefaultAciGenerateApicFile,
+			AciSnatGlobalInfo:           DefaultAciSnatGlobalInfo,
+			AciSnatOperatorName:          DefaultAciSnatOperatorName,
+			AciUseClusterRole:            DefaultAciUseClusterRole,
+			AciHostAgentOpenshiftResource: DefaultAciHostAgentOpenshiftResource,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -834,7 +834,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciMTUHeadroom] = c.Network.AciNetworkProvider.MTUHeadroom
 		networkPluginConfigDefaultsMap[AciNodeSvcSubnet] = c.Network.AciNetworkProvider.NodeSvcSubnet
 		networkPluginConfigDefaultsMap[AciDisableWaitForNetwork] = c.Network.AciNetworkProvider.DisableWaitForNetwork
-		networkPluginConfigDefaultsMap[AciDurationWaitForNetwork,] = c.Network.AciNetworkProvider.DurationWaitForNetworks
+		networkPluginConfigDefaultsMap[AciDurationWaitForNetwork] = c.Network.AciNetworkProvider.DurationWaitForNetwork
 		networkPluginConfigDefaultsMap[AciPodSubnet] = c.Network.AciNetworkProvider.PodSubnet
 		networkPluginConfigDefaultsMap[AciWatchNamespace] = c.Network.AciNetworkProvider.WatchNamespace
 		networkPluginConfigDefaultsMap[AciUseAppsApi] = c.Network.AciNetworkProvider.UseAppsApi

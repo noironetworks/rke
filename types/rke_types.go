@@ -650,6 +650,34 @@ type AciNetworkProvider struct {
 	RunGbpContainer          string   `yaml:"run_gbp_container,omitempty" json:"runGbpContainer,omitempty"`
 	RunOpflexServerContainer string   `yaml:"run_opflex_server_container,omitempty" json:"runOpflexServerContainer,omitempty"`
 	OpflexServerPort         string   `yaml:"opflex_server_port,omitempty" json:"opflexServerPort,omitempty"`
+	ImagePrefix		 string   `yaml:"image_prefix,omitempty" json:"imagePrefix,omitempty"`
+	CniOperatorVersion	 string   `yaml:"cni_operator_version,omitempty" json:"cniOperatorVersion,omitempty"`
+	SrioEnable		 string   `yaml:"srio_enable,omitempty" json:"srioEnable,omitempty"`
+	NodepodifEnable		 string   `yaml:"nodepodif_enable,omitempty" json:"nodepodifEnable,omitempty"`
+	MultusDisable		 string   `yaml:"multus_disable,omitempty" json:"multusDisable,omitempty"`
+	DisablePeriodicSnatGlobalInfoSync string   `yaml:"disable_periodic_snat_global_info_sync,omitempty" json:"disablePeriodicSnatGlobalInfoSync,omitempty"`
+	PodSubnet		 string   `yaml:"pod_subnet,omitempty" json:"podSubnet,omitempty"`
+	EnableUpdates		 string   `yaml:"enable_updates,omitempty" json:"enableUpdates,omitempty"`
+	ApicSubscriptionDelay    string   `yaml:"apic_subscription_delay,omitempty" json:"apicSubscriptionDelay,omitempty"`
+	ApicRefreshtickerAdjust  string   `yaml:"apic_refreshticker_adjust,omitempty" json:"apicRefreshtickerAdjust,omitempty"`
+	OpflexDeviceDeleteTimeout string   `yaml:"opflex_device_delete_timeout,omitempty" json:"opflexDeviceDeleteTimeout,omitempty"`
+	NodeSvcSubnet            string   `yaml:"node_svc_subnet,omitempty" json:"nodeSvcSubnet,omitempty"`
+	DisableWaitForNetwork    string   `yaml:"disable_wait_for_network,omitempty" json:"disableWaitForNetwork,omitempty"`
+	DurationWaitForNetwork   string   `yaml:"duration_wait_for_network,omitempty" json:"durationWaitForNetwork,omitempty"`
+	WatchNamespace		 string   `yaml:"watch_namespace,omitempty" json:"watchNamespace,omitempty"`
+	Flavor		         string   `yaml:"flavor,omitempty" json:"flavor,omitempty"`
+	UseAppsApi		 string   `yaml:"use_apps_api,omitempty" json:"useAppsApi,omitempty"`
+	KubeConfigController     string   `yaml:"kube_config_controller,omitempty" json:"kubeConfigController,omitempty"`
+	GenerateApicFile	 string   `yaml:"generate_apic_file,omitempty" json:"generateApicFile,omitempty"`
+	UseCnideployInitcontainer   string   `yaml:"use_cnideploy_initcontainer,omitempty" json:"useCnideployInitcontainer,omitempty"`
+	GenerateInstallerFiles   string   `yaml:"generate_installer_files,omitempty" json:"generateInstallerFiles,omitempty"`
+	GenerateCnetFile         string   `yaml:"generate_cnet_file,omitempty" json:"generateCnetFile,omitempty"`
+	UseClusterRole           string   `yaml:"use_cluster_role,omitempty" json:"useClusterRole,omitempty"`
+	ApicCertReused           string   `yaml:"apic_cert_reused,omitempty" json:"apicCertReused,omitempty"`
+	SnatGlobalInfo           string   `yaml:"snat_globa_info,omitempty" json:"snatGlobalInfo,omitempty"`
+	SnatOperatorName         string   `yaml:"snat_operator_name,omitempty" json:"snatOperatorName,omitempty"`
+	HostAgentOpenshiftResource string `yaml:"host_agent_openshift_resource,omitempty" json:"hostAgentOpenshiftResource,omitempty"`
+	MTUHeadroom              string   `yaml:"mtu_headroom,omitempty" json:"mTUHeadroom,omitempty"`
 }
 
 type KubernetesServicesOptions struct {
