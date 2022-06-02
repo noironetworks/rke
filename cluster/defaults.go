@@ -72,52 +72,52 @@ const (
 
 	DefaultCanalFlexVolPluginDirectory = "/usr/libexec/kubernetes/kubelet-plugins/volume/exec/nodeagent~uds"
 
-	DefaultAciApicRefreshTime          = "1200"
-	DefaultAciOVSMemoryLimit           = "1Gi"
-	DefaultAciImagePullPolicy          = "Always"
-	DefaultAciImagePrefix              = "noiro"
-	DefaultAciCniOperatorVersion       = "None"
-	DefaultAciServiceMonitorInterval   = "5"
-	DefaultAciPBRTrackingNonSnat       = "false"
-	DefaultAciInstallIstio             = "false"
-	DefaultAciIstioProfile             = "demo"
-	DefaultAciDropLogEnable            = "true"
-	DefaultAciControllerLogLevel       = "info"
-	DefaultAciHostAgentLogLevel        = "info"
-	DefaultAciOpflexAgentLogLevel      = "info"
-	DefaultAciUseAciCniPriorityClass   = "false"
-	DefaultAciNoPriorityClass          = "false"
-	DefaultAciMaxNodesSvcGraph         = "32"
-	DefaultAciSnatContractScope        = "global"
-	DefaultAciSnatNamespace            = "aci-containers-system"
+	DefaultAciApicRefreshTime                   = "1200"
+	DefaultAciOVSMemoryLimit                    = "1Gi"
+	DefaultAciImagePullPolicy                   = "Always"
+	DefaultAciImagePrefix                       = "noiro"
+	DefaultAciCniOperatorVersion                = "None"
+	DefaultAciServiceMonitorInterval            = "5"
+	DefaultAciPBRTrackingNonSnat                = "false"
+	DefaultAciInstallIstio                      = "false"
+	DefaultAciIstioProfile                      = "demo"
+	DefaultAciDropLogEnable                     = "true"
+	DefaultAciControllerLogLevel                = "info"
+	DefaultAciHostAgentLogLevel                 = "info"
+	DefaultAciOpflexAgentLogLevel               = "info"
+	DefaultAciUseAciCniPriorityClass            = "false"
+	DefaultAciNoPriorityClass                   = "false"
+	DefaultAciMaxNodesSvcGraph                  = "32"
+	DefaultAciSnatContractScope                 = "global"
+	DefaultAciSnatNamespace                     = "aci-containers-system"
 	DefaultAciDisablePeriodicSnatGlobalInfoSync = "false"
-	DefaultAciCApic                    = "false"
-	DefaultAciPodSubnetChunkSize       = "32"
-	DefaultAciSnatPortRangeStart       = "5000"
-	DefaultAciSnatPortRangeEnd         = "65000"
-	DefaultAciSnatPortsPerNode         = "3000"
-	DefaultAciUseHostNetnsVolume       = "false"
-	DefaultAciRunGbpContainer          = "false"
-	DefaultAciRunOpflexServerContainer = "false"
-	DefaultAciUseAciAnywhereCRD        = "false"
-	DefaultAciEnableEndpointSlice      = "false"
-	DefaultAciOpflexClientSSL          = "true"
-	DefaultAciUsePrivilegedContainer   = "false"
-	DefaultAciUseOpflexServerVolume    = "false"
-	DefaultApicSubscriptionDelay	   = "None"
-	DefaultApicRefreshtickerAdjust     = "None"
-    DefaultOpflexDeviceDeleteTimeout   = "None"
-	DefaultEnableUpdates			   = "false"
-	DefaultMTUHeadroom				   = "None"
-	DefaultNodeSvcSubnet			   = "None"
-	DefaultDisableWaitForNetwork	   = "false"
-	DefaultDurationWaitForNetwork	   = "210"
-	DefaultPodSubnet				   = "None"
-	DefaultWatchNamespace			   = ""
-	DefaultUseAppsApi				   = "apps/v1"
-	DefaultKubeConfigController		   = "1.1.1.1"
-	DefaultFlavor					   = "kubernetes-1.22"
-	DefaultUseCnideployInitcontainer   = "false"
+	DefaultAciCApic                             = "false"
+	DefaultAciPodSubnetChunkSize                = "32"
+	DefaultAciSnatPortRangeStart                = "5000"
+	DefaultAciSnatPortRangeEnd                  = "65000"
+	DefaultAciSnatPortsPerNode                  = "3000"
+	DefaultAciUseHostNetnsVolume                = "false"
+	DefaultAciRunGbpContainer                   = "false"
+	DefaultAciRunOpflexServerContainer          = "false"
+	DefaultAciUseAciAnywhereCRD                 = "false"
+	DefaultAciEnableEndpointSlice               = "false"
+	DefaultAciOpflexClientSSL                   = "true"
+	DefaultAciUsePrivilegedContainer            = "false"
+	DefaultAciUseOpflexServerVolume             = "false"
+	DefaultApicSubscriptionDelay                = "None"
+	DefaultApicRefreshtickerAdjust              = "None"
+	DefaultOpflexDeviceDeleteTimeout            = "None"
+	DefaultEnableUpdates                        = "false"
+	DefaultMTUHeadroom                          = "None"
+	DefaultNodeSvcSubnet                        = "None"
+	DefaultDisableWaitForNetwork                = "false"
+	DefaultDurationWaitForNetwork               = "210"
+	DefaultPodSubnet                            = "None"
+	DefaultWatchNamespace                       = ""
+	DefaultUseAppsAPI                           = "apps/v1"
+	DefaultKubeConfigController                 = "1.1.1.1"
+	DefaultFlavor                               = "kubernetes-1.22"
+	DefaultUseCnideployInitcontainer            = "false"
 
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
@@ -142,18 +142,16 @@ const (
 	DefaultNetworkMode                = "hostNetwork"
 	DefaultNetworkModeV121            = "hostPort"
 
-	DefaultAciSrioEnable            = "false"
-	DefaultAciNodepodifEnable       = "false"
-	DefaultAciMultusDisable         = "true"
-	DefaultAciGenerateInstallerFiles = "false"
-	DefaultAciGenerateCnetFile       = "false"
-	DefaultAciGenerateApicFile       = "false"
-	DefaultAciSnatGlobalInfo         = "snatglobalinfo"
-	DefaultAciSnatOperatorName       = "snat-operator"
-	DefaultAciUseClusterRole         = "true"
+	DefaultAciSrioEnable                 = "false"
+	DefaultAciNodepodifEnable            = "false"
+	DefaultAciMultusDisable              = "true"
+	DefaultAciGenerateInstallerFiles     = "false"
+	DefaultAciGenerateCnetFile           = "false"
+	DefaultAciGenerateApicFile           = "false"
+	DefaultAciSnatGlobalInfo             = "snatglobalinfo"
+	DefaultAciSnatOperatorName           = "snat-operator"
+	DefaultAciUseClusterRole             = "true"
 	DefaultAciHostAgentOpenshiftResource = "false"
-
-
 )
 
 var (
@@ -511,49 +509,48 @@ func (c *Cluster) setClusterImageDefaults() error {
 		}
 	}
 	systemImagesDefaultsMap := map[*string]string{
-		&c.SystemImages.Alpine:                    d(imageDefaults.Alpine, privRegURL),
-		&c.SystemImages.NginxProxy:                d(imageDefaults.NginxProxy, privRegURL),
-		&c.SystemImages.CertDownloader:            d(imageDefaults.CertDownloader, privRegURL),
-		&c.SystemImages.KubeDNS:                   d(imageDefaults.KubeDNS, privRegURL),
-		&c.SystemImages.KubeDNSSidecar:            d(imageDefaults.KubeDNSSidecar, privRegURL),
-		&c.SystemImages.DNSmasq:                   d(imageDefaults.DNSmasq, privRegURL),
-		&c.SystemImages.KubeDNSAutoscaler:         d(imageDefaults.KubeDNSAutoscaler, privRegURL),
-		&c.SystemImages.CoreDNS:                   d(imageDefaults.CoreDNS, privRegURL),
-		&c.SystemImages.CoreDNSAutoscaler:         d(imageDefaults.CoreDNSAutoscaler, privRegURL),
-		&c.SystemImages.KubernetesServicesSidecar: d(imageDefaults.KubernetesServicesSidecar, privRegURL),
-		&c.SystemImages.Etcd:                      d(imageDefaults.Etcd, privRegURL),
-		&c.SystemImages.Kubernetes:                d(imageDefaults.Kubernetes, privRegURL),
-		&c.SystemImages.PodInfraContainer:         d(imageDefaults.PodInfraContainer, privRegURL),
-		&c.SystemImages.Flannel:                   d(imageDefaults.Flannel, privRegURL),
-		&c.SystemImages.FlannelCNI:                d(imageDefaults.FlannelCNI, privRegURL),
-		&c.SystemImages.CalicoNode:                d(imageDefaults.CalicoNode, privRegURL),
-		&c.SystemImages.CalicoCNI:                 d(imageDefaults.CalicoCNI, privRegURL),
-		&c.SystemImages.CalicoCtl:                 d(imageDefaults.CalicoCtl, privRegURL),
-		&c.SystemImages.CalicoControllers:         d(imageDefaults.CalicoControllers, privRegURL),
-		&c.SystemImages.CalicoFlexVol:             d(imageDefaults.CalicoFlexVol, privRegURL),
-		&c.SystemImages.CanalNode:                 d(imageDefaults.CanalNode, privRegURL),
-		&c.SystemImages.CanalCNI:                  d(imageDefaults.CanalCNI, privRegURL),
-		&c.SystemImages.CanalControllers:          d(imageDefaults.CanalControllers, privRegURL),
-		&c.SystemImages.CanalFlannel:              d(imageDefaults.CanalFlannel, privRegURL),
-		&c.SystemImages.CanalFlexVol:              d(imageDefaults.CanalFlexVol, privRegURL),
-		&c.SystemImages.WeaveNode:                 d(imageDefaults.WeaveNode, privRegURL),
-		&c.SystemImages.WeaveCNI:                  d(imageDefaults.WeaveCNI, privRegURL),
-		&c.SystemImages.Ingress:                   d(imageDefaults.Ingress, privRegURL),
-		&c.SystemImages.IngressBackend:            d(imageDefaults.IngressBackend, privRegURL),
-		&c.SystemImages.IngressWebhook:            d(imageDefaults.IngressWebhook, privRegURL),
-		&c.SystemImages.MetricsServer:             d(imageDefaults.MetricsServer, privRegURL),
-		&c.SystemImages.Nodelocal:                 d(imageDefaults.Nodelocal, privRegURL),
-		&c.SystemImages.AciCniDeployContainer:     d(imageDefaults.AciCniDeployContainer, privRegURL),
-		&c.SystemImages.AciHostContainer:          d(imageDefaults.AciHostContainer, privRegURL),
-		&c.SystemImages.AciOpflexContainer:        d(imageDefaults.AciOpflexContainer, privRegURL),
-		&c.SystemImages.AciMcastContainer:         d(imageDefaults.AciMcastContainer, privRegURL),
-		&c.SystemImages.AciOpenvSwitchContainer:   d(imageDefaults.AciOpenvSwitchContainer, privRegURL),
-		&c.SystemImages.AciControllerContainer:    d(imageDefaults.AciControllerContainer, privRegURL),
-		&c.SystemImages.AciOpflexServerContainer:  d(imageDefaults.AciOpflexServerContainer, privRegURL),
-		&c.SystemImages.AciGbpServerContainer:     d(imageDefaults.AciGbpServerContainer, privRegURL),
-		&c.SystemImages.AciProvisionOperatorContainer:     d(imageDefaults.AciProvisionOperatorContainer, privRegURL),
-		&c.SystemImages.AciContainersOperatorContainer:     d(imageDefaults.AciContainersOperatorContainer, privRegURL),
-
+		&c.SystemImages.Alpine:                         d(imageDefaults.Alpine, privRegURL),
+		&c.SystemImages.NginxProxy:                     d(imageDefaults.NginxProxy, privRegURL),
+		&c.SystemImages.CertDownloader:                 d(imageDefaults.CertDownloader, privRegURL),
+		&c.SystemImages.KubeDNS:                        d(imageDefaults.KubeDNS, privRegURL),
+		&c.SystemImages.KubeDNSSidecar:                 d(imageDefaults.KubeDNSSidecar, privRegURL),
+		&c.SystemImages.DNSmasq:                        d(imageDefaults.DNSmasq, privRegURL),
+		&c.SystemImages.KubeDNSAutoscaler:              d(imageDefaults.KubeDNSAutoscaler, privRegURL),
+		&c.SystemImages.CoreDNS:                        d(imageDefaults.CoreDNS, privRegURL),
+		&c.SystemImages.CoreDNSAutoscaler:              d(imageDefaults.CoreDNSAutoscaler, privRegURL),
+		&c.SystemImages.KubernetesServicesSidecar:      d(imageDefaults.KubernetesServicesSidecar, privRegURL),
+		&c.SystemImages.Etcd:                           d(imageDefaults.Etcd, privRegURL),
+		&c.SystemImages.Kubernetes:                     d(imageDefaults.Kubernetes, privRegURL),
+		&c.SystemImages.PodInfraContainer:              d(imageDefaults.PodInfraContainer, privRegURL),
+		&c.SystemImages.Flannel:                        d(imageDefaults.Flannel, privRegURL),
+		&c.SystemImages.FlannelCNI:                     d(imageDefaults.FlannelCNI, privRegURL),
+		&c.SystemImages.CalicoNode:                     d(imageDefaults.CalicoNode, privRegURL),
+		&c.SystemImages.CalicoCNI:                      d(imageDefaults.CalicoCNI, privRegURL),
+		&c.SystemImages.CalicoCtl:                      d(imageDefaults.CalicoCtl, privRegURL),
+		&c.SystemImages.CalicoControllers:              d(imageDefaults.CalicoControllers, privRegURL),
+		&c.SystemImages.CalicoFlexVol:                  d(imageDefaults.CalicoFlexVol, privRegURL),
+		&c.SystemImages.CanalNode:                      d(imageDefaults.CanalNode, privRegURL),
+		&c.SystemImages.CanalCNI:                       d(imageDefaults.CanalCNI, privRegURL),
+		&c.SystemImages.CanalControllers:               d(imageDefaults.CanalControllers, privRegURL),
+		&c.SystemImages.CanalFlannel:                   d(imageDefaults.CanalFlannel, privRegURL),
+		&c.SystemImages.CanalFlexVol:                   d(imageDefaults.CanalFlexVol, privRegURL),
+		&c.SystemImages.WeaveNode:                      d(imageDefaults.WeaveNode, privRegURL),
+		&c.SystemImages.WeaveCNI:                       d(imageDefaults.WeaveCNI, privRegURL),
+		&c.SystemImages.Ingress:                        d(imageDefaults.Ingress, privRegURL),
+		&c.SystemImages.IngressBackend:                 d(imageDefaults.IngressBackend, privRegURL),
+		&c.SystemImages.IngressWebhook:                 d(imageDefaults.IngressWebhook, privRegURL),
+		&c.SystemImages.MetricsServer:                  d(imageDefaults.MetricsServer, privRegURL),
+		&c.SystemImages.Nodelocal:                      d(imageDefaults.Nodelocal, privRegURL),
+		&c.SystemImages.AciCniDeployContainer:          d(imageDefaults.AciCniDeployContainer, privRegURL),
+		&c.SystemImages.AciHostContainer:               d(imageDefaults.AciHostContainer, privRegURL),
+		&c.SystemImages.AciOpflexContainer:             d(imageDefaults.AciOpflexContainer, privRegURL),
+		&c.SystemImages.AciMcastContainer:              d(imageDefaults.AciMcastContainer, privRegURL),
+		&c.SystemImages.AciOpenvSwitchContainer:        d(imageDefaults.AciOpenvSwitchContainer, privRegURL),
+		&c.SystemImages.AciControllerContainer:         d(imageDefaults.AciControllerContainer, privRegURL),
+		&c.SystemImages.AciOpflexServerContainer:       d(imageDefaults.AciOpflexServerContainer, privRegURL),
+		&c.SystemImages.AciGbpServerContainer:          d(imageDefaults.AciGbpServerContainer, privRegURL),
+		&c.SystemImages.AciProvisionOperatorContainer:  d(imageDefaults.AciProvisionOperatorContainer, privRegURL),
+		&c.SystemImages.AciContainersOperatorContainer: d(imageDefaults.AciContainersOperatorContainer, privRegURL),
 
 		// this's a stopgap, we could drop this after https://github.com/kubernetes/kubernetes/pull/75618 merged
 		&c.SystemImages.WindowsPodInfraContainer: d(imageDefaults.WindowsPodInfraContainer, privRegURL),
@@ -628,62 +625,62 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		}
 	case AciNetworkPlugin:
 		networkPluginConfigDefaultsMap = map[string]string{
-			AciOVSMemoryLimit:           DefaultAciOVSMemoryLimit,
-			AciImagePullPolicy:          DefaultAciImagePullPolicy,
-			AciImagePrefix:              DefaultAciImagePrefix,
-			AciCniOperatorVersion:       DefaultAciCniOperatorVersion,
-			AciPBRTrackingNonSnat:       DefaultAciPBRTrackingNonSnat,
-			AciInstallIstio:             DefaultAciInstallIstio,
-			AciIstioProfile:             DefaultAciIstioProfile,
-			AciDropLogEnable:            DefaultAciDropLogEnable,
-			AciControllerLogLevel:       DefaultAciControllerLogLevel,
-			AciHostAgentLogLevel:        DefaultAciHostAgentLogLevel,
-			AciOpflexAgentLogLevel:      DefaultAciOpflexAgentLogLevel,
-			AciApicRefreshTime:          DefaultAciApicRefreshTime,
-			AciServiceMonitorInterval:   DefaultAciServiceMonitorInterval,
-			AciUseAciCniPriorityClass:   DefaultAciUseAciCniPriorityClass,
-			AciNoPriorityClass:          DefaultAciNoPriorityClass,
-			AciMaxNodesSvcGraph:         DefaultAciMaxNodesSvcGraph,
-			AciSnatContractScope:        DefaultAciSnatContractScope,
-			AciPodSubnetChunkSize:       DefaultAciPodSubnetChunkSize,
-			AciEnableEndpointSlice:      DefaultAciEnableEndpointSlice,
-			AciSnatNamespace:            DefaultAciSnatNamespace,
+			AciOVSMemoryLimit:                 DefaultAciOVSMemoryLimit,
+			AciImagePullPolicy:                DefaultAciImagePullPolicy,
+			AciImagePrefix:                    DefaultAciImagePrefix,
+			AciCniOperatorVersion:             DefaultAciCniOperatorVersion,
+			AciPBRTrackingNonSnat:             DefaultAciPBRTrackingNonSnat,
+			AciInstallIstio:                   DefaultAciInstallIstio,
+			AciIstioProfile:                   DefaultAciIstioProfile,
+			AciDropLogEnable:                  DefaultAciDropLogEnable,
+			AciControllerLogLevel:             DefaultAciControllerLogLevel,
+			AciHostAgentLogLevel:              DefaultAciHostAgentLogLevel,
+			AciOpflexAgentLogLevel:            DefaultAciOpflexAgentLogLevel,
+			AciApicRefreshTime:                DefaultAciApicRefreshTime,
+			AciServiceMonitorInterval:         DefaultAciServiceMonitorInterval,
+			AciUseAciCniPriorityClass:         DefaultAciUseAciCniPriorityClass,
+			AciNoPriorityClass:                DefaultAciNoPriorityClass,
+			AciMaxNodesSvcGraph:               DefaultAciMaxNodesSvcGraph,
+			AciSnatContractScope:              DefaultAciSnatContractScope,
+			AciPodSubnetChunkSize:             DefaultAciPodSubnetChunkSize,
+			AciEnableEndpointSlice:            DefaultAciEnableEndpointSlice,
+			AciSnatNamespace:                  DefaultAciSnatNamespace,
 			DisablePeriodicSnatGlobalInfoSync: DefaultAciDisablePeriodicSnatGlobalInfoSync,
-			AciSnatPortRangeStart:       DefaultAciSnatPortRangeStart,
-			AciSnatPortRangeEnd:         DefaultAciSnatPortRangeEnd,
-			AciSnatPortsPerNode:         DefaultAciSnatPortsPerNode,
-			AciOpflexClientSSL:          DefaultAciOpflexClientSSL,
-			AciUsePrivilegedContainer:   DefaultAciUsePrivilegedContainer,
-			AciUseOpflexServerVolume:    DefaultAciUseOpflexServerVolume,
-			AciUseHostNetnsVolume:       DefaultAciUseHostNetnsVolume,
-			AciCApic:                    DefaultAciCApic,
-			AciUseAciAnywhereCRD:        DefaultAciUseAciAnywhereCRD,
-			AciRunGbpContainer:          DefaultAciRunGbpContainer,
-			AciRunOpflexServerContainer: DefaultAciRunOpflexServerContainer,
-			AciApicSubscriptionDelay:    DefaultApicSubscriptionDelay,
-			AciApicRefreshtickerAdjust:  DefaultApicRefreshtickerAdjust,
-			AciOpflexDeviceDeleteTimeout: DefaultOpflexDeviceDeleteTimeout,
-			AciEnableUpdates:			 DefaultEnableUpdates,
-			AciMTUHeadroom:				 DefaultMTUHeadroom,
-			AciNodeSvcSubnet:			 DefaultNodeSvcSubnet,
-			AciDisableWaitForNetwork:    DefaultDisableWaitForNetwork,
-			AciDurationWaitForNetwork:   DefaultDurationWaitForNetwork,
-			AciPodSubnet:				 DefaultPodSubnet,
-			AciWatchNamespace:			 DefaultWatchNamespace,
-			AciUseAppsApi:				 DefaultUseAppsApi,
-			AciKubeConfigController:	 DefaultKubeConfigController,
-			AciFlavor:					 DefaultFlavor,
-			AciUseCnideployInitcontainer: DefaultUseCnideployInitcontainer,
-			AciSrioEnable:               DefaultAciSrioEnable,
-	        AciNodepodifEnable:          DefaultAciNodepodifEnable,
-			AciMultusDisable:            DefaultAciMultusDisable,
-			AciGenerateInstallerFiles:   DefaultAciGenerateInstallerFiles,
-			AciGenerateCnetFile:         DefaultAciGenerateCnetFile,
-			AciGenerateApicFile:         DefaultAciGenerateApicFile,
-			AciSnatGlobalInfo:           DefaultAciSnatGlobalInfo,
-			AciSnatOperatorName:          DefaultAciSnatOperatorName,
-			AciUseClusterRole:            DefaultAciUseClusterRole,
-			AciHostAgentOpenshiftResource: DefaultAciHostAgentOpenshiftResource,
+			AciSnatPortRangeStart:             DefaultAciSnatPortRangeStart,
+			AciSnatPortRangeEnd:               DefaultAciSnatPortRangeEnd,
+			AciSnatPortsPerNode:               DefaultAciSnatPortsPerNode,
+			AciOpflexClientSSL:                DefaultAciOpflexClientSSL,
+			AciUsePrivilegedContainer:         DefaultAciUsePrivilegedContainer,
+			AciUseOpflexServerVolume:          DefaultAciUseOpflexServerVolume,
+			AciUseHostNetnsVolume:             DefaultAciUseHostNetnsVolume,
+			AciCApic:                          DefaultAciCApic,
+			AciUseAciAnywhereCRD:              DefaultAciUseAciAnywhereCRD,
+			AciRunGbpContainer:                DefaultAciRunGbpContainer,
+			AciRunOpflexServerContainer:       DefaultAciRunOpflexServerContainer,
+			AciApicSubscriptionDelay:          DefaultApicSubscriptionDelay,
+			AciApicRefreshtickerAdjust:        DefaultApicRefreshtickerAdjust,
+			AciOpflexDeviceDeleteTimeout:      DefaultOpflexDeviceDeleteTimeout,
+			AciEnableUpdates:                  DefaultEnableUpdates,
+			AciMTUHeadroom:                    DefaultMTUHeadroom,
+			AciNodeSvcSubnet:                  DefaultNodeSvcSubnet,
+			AciDisableWaitForNetwork:          DefaultDisableWaitForNetwork,
+			AciDurationWaitForNetwork:         DefaultDurationWaitForNetwork,
+			AciPodSubnet:                      DefaultPodSubnet,
+			AciWatchNamespace:                 DefaultWatchNamespace,
+			AciUseAppsAPI:                     DefaultUseAppsAPI,
+			AciKubeConfigController:           DefaultKubeConfigController,
+			AciFlavor:                         DefaultFlavor,
+			AciUseCnideployInitcontainer:      DefaultUseCnideployInitcontainer,
+			AciSrioEnable:                     DefaultAciSrioEnable,
+			AciNodepodifEnable:                DefaultAciNodepodifEnable,
+			AciMultusDisable:                  DefaultAciMultusDisable,
+			AciGenerateInstallerFiles:         DefaultAciGenerateInstallerFiles,
+			AciGenerateCnetFile:               DefaultAciGenerateCnetFile,
+			AciGenerateApicFile:               DefaultAciGenerateApicFile,
+			AciSnatGlobalInfo:                 DefaultAciSnatGlobalInfo,
+			AciSnatOperatorName:               DefaultAciSnatOperatorName,
+			AciUseClusterRole:                 DefaultAciUseClusterRole,
+			AciHostAgentOpenshiftResource:     DefaultAciHostAgentOpenshiftResource,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -745,7 +742,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.DurationWaitForNetwork, DefaultDurationWaitForNetwork)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.PodSubnet, DefaultPodSubnet)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.WatchNamespace, DefaultWatchNamespace)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAppsApi, DefaultUseAppsApi)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseAppsAPI, DefaultUseAppsAPI)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.KubeConfigController, DefaultKubeConfigController)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.Flavor, DefaultFlavor)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseCnideployInitcontainer, DefaultUseCnideployInitcontainer)
@@ -837,7 +834,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciDurationWaitForNetwork] = c.Network.AciNetworkProvider.DurationWaitForNetwork
 		networkPluginConfigDefaultsMap[AciPodSubnet] = c.Network.AciNetworkProvider.PodSubnet
 		networkPluginConfigDefaultsMap[AciWatchNamespace] = c.Network.AciNetworkProvider.WatchNamespace
-		networkPluginConfigDefaultsMap[AciUseAppsApi] = c.Network.AciNetworkProvider.UseAppsApi
+		networkPluginConfigDefaultsMap[AciUseAppsAPI] = c.Network.AciNetworkProvider.UseAppsAPI
 		networkPluginConfigDefaultsMap[AciKubeConfigController] = c.Network.AciNetworkProvider.KubeConfigController
 		networkPluginConfigDefaultsMap[AciFlavor] = c.Network.AciNetworkProvider.Flavor
 		networkPluginConfigDefaultsMap[AciUseCnideployInitcontainer] = c.Network.AciNetworkProvider.UseCnideployInitcontainer
@@ -845,10 +842,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciSnatOperatorName] = c.Network.AciNetworkProvider.SnatOperatorName
 		networkPluginConfigDefaultsMap[AciUseClusterRole] = c.Network.AciNetworkProvider.UseClusterRole
 		networkPluginConfigDefaultsMap[AciHostAgentOpenshiftResource] = c.Network.AciNetworkProvider.HostAgentOpenshiftResource
-		
-		
-		
-		
+
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
