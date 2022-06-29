@@ -10636,7 +10636,7 @@
  "K8sVersionedTemplates": {
   "aci": {
    "\u003e=1.17.0-alpha \u003c1.20.0-rancher0": "aci-v5.0.0",
-   "\u003e=1.20.0-rancher0": "aci-v5.2.3"
+   "\u003e=1.20.0-rancher0 \u003c1.23.0-rancher1-1": "aci-v5.2.3"
   },
   "calico": {
    "\u003e=1.13.0-rancher0 \u003c1.15.0-rancher0": "calico-v1.13",
