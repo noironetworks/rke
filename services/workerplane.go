@@ -312,7 +312,7 @@ func doDeployWorkerPlane(ctx context.Context, host *hosts.Host,
 	}
 	// run kubelet
 	if err := runKubelet(ctx, host, localConnDialerFactory, prsMap, processMap[KubeletContainerName], certMap, alpineImage); err != nil {
-		return err
+		logrus.Debugf("kubelet failed healthcheck")
 	}
 	return runKubeproxy(ctx, host, localConnDialerFactory, prsMap, processMap[KubeproxyContainerName], alpineImage)
 }
