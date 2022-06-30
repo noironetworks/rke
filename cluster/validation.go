@@ -119,6 +119,10 @@ func transformAciNetworkOption(option string) (string, string) {
 		description = "Vlan for service graph nodes on aci"
 	case AciInfraVlan:
 		description = "Vlan for infra network on aci"
+	case AciDisableWaitForNetwork:
+		description = "Disable waiting for network on aci"
+	case AciDurationWaitForNetwork:
+		description = "Wait duration for network on aci"
 	}
 	return option, description
 }
@@ -137,6 +141,21 @@ func validateAciCloudOptionsDisabled(option string, value string) (string, strin
 			ok = true
 		}
 		description = "Mount host netns for opflex server"
+	case AciApicSubscriptionDelay:
+		if value == DefaultAciApicSubscriptionDelay {
+			ok = true
+		}
+		description = "APIC subscription delay"
+	case AciApicRefreshTickerAdjust:
+		if value == DefaultAciApicRefreshTickerAdjust {
+			ok = true
+		}
+		description = "APIC refresh ticker adjust"
+	case AciOpflexDeviceDeleteTimeout:
+		if value == DefaultAciOpflexDeviceDeleteTimeout {
+			ok = true
+		}
+		description = "opflex device delete timeout"
 	case AciCApic:
 		if value == DefaultAciCApic {
 			ok = true
@@ -210,8 +229,8 @@ func validateNetworkOptions(c *Cluster) error {
 	}
 	if c.Network.Plugin == AciNetworkPlugin {
 		//Skip cloud options and throw an error.
-		cloudOptionsList := []string{AciEpRegistry, AciOpflexMode, AciUseHostNetnsVolume, AciUseOpflexServerVolume,
-			AciSubnetDomainName, AciKafkaClientCrt, AciKafkaClientKey, AciCApic, UseAciAnywhereCRD,
+		cloudOptionsList := []string{AciEpRegistry, AciOpflexMode, AciUseHostNetnsVolume, AciApicSubscriptionDelay, AciApicRefreshTickerAdjust, AciOpflexDeviceDeleteTimeout,
+			AciUseOpflexServerVolume, AciSubnetDomainName, AciKafkaClientCrt, AciKafkaClientKey, AciCApic, UseAciAnywhereCRD,
 			AciOverlayVRFName, AciGbpPodSubnet, AciRunGbpContainer, AciRunOpflexServerContainer, AciOpflexServerPort}
 		for _, v := range cloudOptionsList {
 			val, ok := c.Network.Options[v]
@@ -225,7 +244,7 @@ func validateNetworkOptions(c *Cluster) error {
 			AciApicUserCrt, AciEncapType, AciMcastRangeStart, AciMcastRangeEnd,
 			AciNodeSubnet, AciAEP, AciVRFName, AciVRFTenant, AciL3Out, AciDynamicExternalSubnet,
 			AciStaticExternalSubnet, AciServiceGraphSubnet, AciKubeAPIVlan, AciServiceVlan, AciInfraVlan,
-			AciNodeSubnet}
+			AciNodeSubnet, AciDisableWaitForNetwork, AciDurationWaitForNetwork}
 		for _, v := range networkOptionsList {
 			val, ok := c.Network.Options[v]
 			if !ok || val == "" {
