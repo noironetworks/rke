@@ -666,6 +666,8 @@ type AciNetworkProvider struct {
 	UseClusterRole                    string   `yaml:"use_cluster_role,omitempty" json:"useClusterRole,omitempty"`
 	NoWaitForServiceEpReadiness       string   `yaml:"no_wait_for_service_ep_readiness,omitempty" json:"noWaitForServiceEpReadiness,omitempty"`
 	AddExternalSubnetsToRdconfig      string   `yaml:"add_external_subnets_to_rdconfig,omitempty" json:"addExternalSubnetsToRdconfig,omitempty"`
+	ServiceGraphEndpointAddDelay      string   `yaml:"service_graph_endpoint_add_delay,omitempty" json:"serviceGraphEndpointAddDelay,omitempty"`
+	ServiceGraphEndpointAddServices   []string `yaml:"service_graph_endpoint_ddd_services,omitempty" json:"serviceGraphEndpointAddServices,omitempty"`
 }
 
 type KubernetesServicesOptions struct {
