@@ -154,6 +154,7 @@ const (
 	AciSleepTimeSnatGlobalInfoSync       = "aci_sleep_time_snat_global_info_sync"
 	AciOpflexAgentOpflexAsyncjsonEnabled = "aci_opflex_agent_opflex_asyncjson_enabled"
 	AciOpflexAgentOvsAsyncjsonEnabled    = "aci_opflex_agent_ovs_asyncjson_enabled"
+	AciOpflexAgentPolicyRetryDelayTimer  = "aci_opflex_agent_policy_retry_delay_timer"
 	// List of map keys to be used with network templates
 
 	// EtcdEndpoints is the server address for Etcd, used by calico
@@ -298,6 +299,7 @@ const (
 	SleepTimeSnatGlobalInfoSync            = "SleepTimeSnatGlobalInfoSync"
 	OpflexAgentOpflexAsyncjsonEnabled      = "OpflexAgentOpflexAsyncjsonEnabled"
 	OpflexAgentOvsAsyncjsonEnabled         = "OpflexAgentOvsAsyncjsonEnabled"
+	OpflexAgentPolicyRetryDelayTimer       = "OpflexAgentPolicyRetryDelayTimer"
 	OVSMemoryLimit                         = "OVSMemoryLimit"
 	NodeSubnet                             = "NodeSubnet"
 	NodeSelector                           = "NodeSelector"
@@ -602,6 +604,7 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		SleepTimeSnatGlobalInfoSync:       c.Network.Options[AciSleepTimeSnatGlobalInfoSync],
 		OpflexAgentOpflexAsyncjsonEnabled: c.Network.Options[AciOpflexAgentOpflexAsyncjsonEnabled],
 		OpflexAgentOvsAsyncjsonEnabled:    c.Network.Options[AciOpflexAgentOvsAsyncjsonEnabled],
+		OpflexAgentPolicyRetryDelayTimer:  c.Network.Options[AciOpflexAgentPolicyRetryDelayTimer],
 		AciCniDeployContainer:             c.SystemImages.AciCniDeployContainer,
 		AciHostContainer:                  c.SystemImages.AciHostContainer,
 		AciOpflexContainer:                c.SystemImages.AciOpflexContainer,

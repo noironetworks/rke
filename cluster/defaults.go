@@ -119,6 +119,7 @@ const (
 	DefaultAciSleepTimeSnatGlobalInfoSync       = "0"
 	DefaultAciOpflexAgentOpflexAsyncjsonEnabled = "false"
 	DefaultAciOpflexAgentOvsAsyncjsonEnabled    = "false"
+	DefaultAciOpflexAgentPolicyRetryDelayTimer  = "10"
 
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
@@ -687,6 +688,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciSleepTimeSnatGlobalInfoSync:       DefaultAciSleepTimeSnatGlobalInfoSync,
 			AciOpflexAgentOpflexAsyncjsonEnabled: DefaultAciOpflexAgentOpflexAsyncjsonEnabled,
 			AciOpflexAgentOvsAsyncjsonEnabled:    DefaultAciOpflexAgentOvsAsyncjsonEnabled,
+			AciOpflexAgentPolicyRetryDelayTimer:  DefaultAciOpflexAgentPolicyRetryDelayTimer,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -750,6 +752,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.SleepTimeSnatGlobalInfoSync, DefaultAciSleepTimeSnatGlobalInfoSync)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentOpflexAsyncjsonEnabled, DefaultAciOpflexAgentOpflexAsyncjsonEnabled)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentOvsAsyncjsonEnabled, DefaultAciOpflexAgentOvsAsyncjsonEnabled)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentPolicyRetryDelayTimer, DefaultAciOpflexAgentPolicyRetryDelayTimer)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
 		networkPluginConfigDefaultsMap[AciPBRTrackingNonSnat] = c.Network.AciNetworkProvider.PBRTrackingNonSnat
@@ -796,6 +799,7 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciSleepTimeSnatGlobalInfoSync] = c.Network.AciNetworkProvider.SleepTimeSnatGlobalInfoSync
 		networkPluginConfigDefaultsMap[AciOpflexAgentOpflexAsyncjsonEnabled] = c.Network.AciNetworkProvider.OpflexAgentOpflexAsyncjsonEnabled
 		networkPluginConfigDefaultsMap[AciOpflexAgentOvsAsyncjsonEnabled] = c.Network.AciNetworkProvider.OpflexAgentOvsAsyncjsonEnabled
+		networkPluginConfigDefaultsMap[AciOpflexAgentPolicyRetryDelayTimer] = c.Network.AciNetworkProvider.OpflexAgentPolicyRetryDelayTimer
 		networkPluginConfigDefaultsMap[AciSystemIdentifier] = c.Network.AciNetworkProvider.SystemIdentifier
 		networkPluginConfigDefaultsMap[AciToken] = c.Network.AciNetworkProvider.Token
 		networkPluginConfigDefaultsMap[AciApicUserName] = c.Network.AciNetworkProvider.ApicUserName

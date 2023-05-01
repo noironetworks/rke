@@ -671,6 +671,7 @@ type AciNetworkProvider struct {
 	SleepTimeSnatGlobalInfoSync       string              `yaml:"sleep_time_snat_global_info_sync,omitempty" json:"sleepTimeSnatGlobalInfoSync,omitempty"`
 	OpflexAgentOpflexAsyncjsonEnabled string              `yaml:"opflex_agent_opflex_asyncjson_enabled,omitempty" json:"opflexAgentOpflexAsyncjsonEnabled,omitempty"`
 	OpflexAgentOvsAsyncjsonEnabled    string              `yaml:"opflex_agent_ovs_asyncjson_enabled,omitempty" json:"opflexAgentOvsAsyncjsonEnabled,omitempty"`
+	OpflexAgentPolicyRetryDelayTimer  string              `yaml:"opflex_agent_policy_retry_delay_timer,omitempty" json:"opflexAgentPolicyRetryDelayTimer,omitempty"`
 }
 
 type KubernetesServicesOptions struct {
