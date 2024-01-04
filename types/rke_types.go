@@ -696,7 +696,7 @@ type AciNetworkProvider struct {
 	AddExternalContractToDefaultEpg      string              `yaml:"add_external_contract_to_default_epg,omitempty" json:"addExternalContractToDefaultEpg,omitempty"`
 	EnableOpflexAgentReconnect           string              `yaml:"enable_opflex_agent_reconnect,omitempty" json:"enableOpflexAgentReconnect,omitempty"`
 	OpflexOpensslCompat                  string              `yaml:"opflex_openssl_compat,omitempty" json:"opflexOpensslCompat,omitempty"`
-	NodeSnatRedirectExclude              string              `yaml:"node_snat_redirect_exclude,omitempty" json:"nodeSnatRedirectExclude,omitempty"`
+	NodeSnatRedirectExclude              []map[string]string `yaml:"node_snat_redirect_exclude,omitempty" json:"nodeSnatRedirectExclude,omitempty"`
 	TolerationSeconds                    string              `yaml:"toleration_seconds,omitempty" json:"tolerationSeconds,omitempty"`
 }
 

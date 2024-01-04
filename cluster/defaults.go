@@ -1017,7 +1017,6 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AddExternalContractToDefaultEpg] = c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg
 		networkPluginConfigDefaultsMap[EnableOpflexAgentReconnect] = c.Network.AciNetworkProvider.EnableOpflexAgentReconnect
 		networkPluginConfigDefaultsMap[OpflexOpensslCompat] = c.Network.AciNetworkProvider.OpflexOpensslCompat
-		networkPluginConfigDefaultsMap[NodeSnatRedirectExclude] = c.Network.AciNetworkProvider.NodeSnatRedirectExclude
 		networkPluginConfigDefaultsMap[TolerationSeconds] = c.Network.AciNetworkProvider.TolerationSeconds
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
