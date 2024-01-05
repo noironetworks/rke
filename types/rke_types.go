@@ -697,7 +697,7 @@ type AciNetworkProvider struct {
 	EnableOpflexAgentReconnect           string                   `yaml:"enable_opflex_agent_reconnect,omitempty" json:"enableOpflexAgentReconnect,omitempty"`
 	OpflexOpensslCompat                  string                   `yaml:"opflex_openssl_compat,omitempty" json:"opflexOpensslCompat,omitempty"`
 	NodeSnatRedirectExclude              []map[string]interface{} `yaml:"node_snat_redirect_exclude,omitempty" json:"nodeSnatRedirectExclude,omitempty"`
-	TolerationSeconds                    int                      `yaml:"toleration_seconds,omitempty" json:"tolerationSeconds,omitempty"`
+	TolerationSeconds                    string                   `yaml:"toleration_seconds,omitempty" json:"tolerationSeconds,omitempty"`
 }
 
 type KubernetesServicesOptions struct {

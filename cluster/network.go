@@ -176,7 +176,6 @@ const (
 	AciAddExternalContractToDefaultEpg      = "aci_add_external_contract_to_default_epg"
 	AciEnableOpflexAgentReconnect           = "aci_enable_opflex_agent_reconnect"
 	AciOpflexOpensslCompat                  = "aci_opflex_openssl_compat"
-	AciNodeSnatRedirectExclude              = "aci_node_snat_redirect_exclude"
 	AciTolerationSeconds                    = "aci_toleration_seconds"
 	// List of map keys to be used with network templates
 
@@ -712,8 +711,8 @@ func (c *Cluster) doAciDeploy(ctx context.Context, data map[string]interface{}) 
 		AddExternalContractToDefaultEpg:      c.Network.Options[AciAddExternalContractToDefaultEpg],
 		EnableOpflexAgentReconnect:           c.Network.Options[AciEnableOpflexAgentReconnect],
 		OpflexOpensslCompat:                  c.Network.Options[AciOpflexOpensslCompat],
+		TolerationSeconds:                    c.Network.Options[AciTolerationSeconds],
 		NodeSnatRedirectExclude:              c.Network.AciNetworkProvider.NodeSnatRedirectExclude,
-		TolerationSeconds:                    c.Network.AciNetworkProvider.TolerationSeconds,
 		AciCniDeployContainer:                c.SystemImages.AciCniDeployContainer,
 		AciHostContainer:                     c.SystemImages.AciHostContainer,
 		AciOpflexContainer:                   c.SystemImages.AciOpflexContainer,
