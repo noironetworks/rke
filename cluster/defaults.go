@@ -135,7 +135,7 @@ const (
 	DefaultAddExternalContractToDefaultEpg           = "false"
 	DefaultEnableOpflexAgentReconnect                = "false"
 	DefaultOpflexOpensslCompat                       = "false"
-	DefaultTolerationSeconds                         = "600"
+	DefaultTolerationSeconds                         = 600
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
