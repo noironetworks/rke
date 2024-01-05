@@ -135,7 +135,6 @@ const (
 	DefaultAddExternalContractToDefaultEpg           = "false"
 	DefaultEnableOpflexAgentReconnect                = "false"
 	DefaultOpflexOpensslCompat                       = "false"
-	DefaultTolerationSeconds                         = 600
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
@@ -915,7 +914,6 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg, DefaultAddExternalContractToDefaultEpg)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.EnableOpflexAgentReconnect, DefaultEnableOpflexAgentReconnect)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexOpensslCompat, DefaultOpflexOpensslCompat)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.TolerationSeconds, DefaultTolerationSeconds)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciOVSMemoryRequest] = c.Network.AciNetworkProvider.OVSMemoryRequest
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
@@ -1017,7 +1015,6 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AddExternalContractToDefaultEpg] = c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg
 		networkPluginConfigDefaultsMap[EnableOpflexAgentReconnect] = c.Network.AciNetworkProvider.EnableOpflexAgentReconnect
 		networkPluginConfigDefaultsMap[OpflexOpensslCompat] = c.Network.AciNetworkProvider.OpflexOpensslCompat
-		networkPluginConfigDefaultsMap[TolerationSeconds] = c.Network.AciNetworkProvider.TolerationSeconds
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
