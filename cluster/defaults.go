@@ -131,10 +131,10 @@ const (
 	DefaultAciUseSystemNodePriorityClass             = "false"
 	DefaultAciAciContainersMemoryLimit               = "3Gi"
 	DefaultAciAciContainersMemoryRequest             = "128Mi"
-	DefaultOpflexAgentStatistics                     = "true"
-	DefaultAddExternalContractToDefaultEpg           = "false"
-	DefaultEnableOpflexAgentReconnect                = "false"
-	DefaultOpflexOpensslCompat                       = "false"
+	DefaultAciOpflexAgentStatistics                  = "true"
+	DefaultAciAddExternalContractToDefaultEpg        = "false"
+	DefaultAciEnableOpflexAgentReconnect             = "false"
+	DefaultAciOpflexOpensslCompat                    = "false"
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
@@ -910,10 +910,10 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.UseSystemNodePriorityClass, DefaultAciUseSystemNodePriorityClass)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.AciContainersMemoryLimit, DefaultAciAciContainersMemoryLimit)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.AciContainersMemoryRequest, DefaultAciAciContainersMemoryRequest)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentStatistics, DefaultOpflexAgentStatistics)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg, DefaultAddExternalContractToDefaultEpg)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.EnableOpflexAgentReconnect, DefaultEnableOpflexAgentReconnect)
-		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexOpensslCompat, DefaultOpflexOpensslCompat)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexAgentStatistics, DefaultAciOpflexAgentStatistics)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg, DefaultAciAddExternalContractToDefaultEpg)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.EnableOpflexAgentReconnect, DefaultAciEnableOpflexAgentReconnect)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexOpensslCompat, DefaultAciOpflexOpensslCompat)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciOVSMemoryRequest] = c.Network.AciNetworkProvider.OVSMemoryRequest
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
@@ -1011,10 +1011,10 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciOpflexAgentMemoryLimit] = c.Network.AciNetworkProvider.OpflexAgentMemoryLimit
 		networkPluginConfigDefaultsMap[AciAciContainersMemoryRequest] = c.Network.AciNetworkProvider.AciContainersMemoryRequest
 		networkPluginConfigDefaultsMap[AciAciContainersMemoryLimit] = c.Network.AciNetworkProvider.AciContainersMemoryLimit
-		networkPluginConfigDefaultsMap[OpflexAgentStatistics] = c.Network.AciNetworkProvider.OpflexAgentStatistics
-		networkPluginConfigDefaultsMap[AddExternalContractToDefaultEpg] = c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg
-		networkPluginConfigDefaultsMap[EnableOpflexAgentReconnect] = c.Network.AciNetworkProvider.EnableOpflexAgentReconnect
-		networkPluginConfigDefaultsMap[OpflexOpensslCompat] = c.Network.AciNetworkProvider.OpflexOpensslCompat
+		networkPluginConfigDefaultsMap[AciOpflexAgentStatistics] = c.Network.AciNetworkProvider.OpflexAgentStatistics
+		networkPluginConfigDefaultsMap[AciAddExternalContractToDefaultEpg] = c.Network.AciNetworkProvider.AddExternalContractToDefaultEpg
+		networkPluginConfigDefaultsMap[AciEnableOpflexAgentReconnect] = c.Network.AciNetworkProvider.EnableOpflexAgentReconnect
+		networkPluginConfigDefaultsMap[AciOpflexOpensslCompat] = c.Network.AciNetworkProvider.OpflexOpensslCompat
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
