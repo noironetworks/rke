@@ -141,6 +141,11 @@ const (
 	DefaultAciApicConnectionRetryLimit               = "5"
 	DefaultAciTaintNotReadyNode                      = "false"
 	DefaultAciDropLogDisableEvents                   = "false"
+	DefaultAciOpflexStartupEnabled                   = "true"
+	DefaultAciOpflexStartupPolicyDuration            = "80"
+	DefaultAciOpflexStartupResolveAftConn            = "true"
+	DefaultAciOpflexSwitchSyncDelay                  = "10"
+	DefaultAciOpflexSwitchSyncDynamic                = "5"
 	KubeAPIArgAdmissionControlConfigFile             = "admission-control-config-file"
 	DefaultKubeAPIArgAdmissionControlConfigFileValue = "/etc/kubernetes/admission.yaml"
 
@@ -844,6 +849,11 @@ func (c *Cluster) setClusterNetworkDefaults() {
 			AciUseSystemNodePriorityClass:        DefaultAciUseSystemNodePriorityClass,
 			AciContainersMemoryRequest:           DefaultAciAciContainersMemoryRequest,
 			AciContainersMemoryLimit:             DefaultAciAciContainersMemoryLimit,
+			AciOpflexStartupEnabled:              DefaultAciOpflexStartupEnabled,
+			AciOpflexStartupPolicyDuration:       DefaultAciOpflexStartupPolicyDuration,
+			AciOpflexStartupResolveAftConn:       DefaultAciOpflexStartupResolveAftConn,
+			AciOpflexSwitchSyncDelay:             DefaultAciOpflexSwitchSyncDelay,
+			AciOpflexSwitchSyncDynamic:           DefaultAciOpflexSwitchSyncDynamic,
 		}
 	}
 	if c.Network.CalicoNetworkProvider != nil {
@@ -1031,6 +1041,11 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		networkPluginConfigDefaultsMap[AciApicConnectionRetryLimit] = c.Network.AciNetworkProvider.ApicConnectionRetryLimit
 		networkPluginConfigDefaultsMap[AciTaintNotReadyNode] = c.Network.AciNetworkProvider.TaintNotReadyNode
 		networkPluginConfigDefaultsMap[AciDropLogDisableEvents] = c.Network.AciNetworkProvider.DropLogDisableEvents
+		networkPluginConfigDefaultsMap[AciOpflexStartupEnabled] = c.Network.AciNetworkProvider.OpflexStartupEnabled
+		networkPluginConfigDefaultsMap[AciOpflexStartupPolicyDuration] = c.Network.AciNetworkProvider.OpflexStartupPolicyDuration
+		networkPluginConfigDefaultsMap[AciOpflexStartupResolveAftConn] = c.Network.AciNetworkProvider.OpflexStartupResolveAftConn
+		networkPluginConfigDefaultsMap[AciOpflexSwitchSyncDelay] = c.Network.AciNetworkProvider.OpflexSwitchSyncDelay
+		networkPluginConfigDefaultsMap[AciOpflexSwitchSyncDynamic] = c.Network.AciNetworkProvider.OpflexSwitchSyncDynamic
 	}
 	for k, v := range networkPluginConfigDefaultsMap {
 		setDefaultIfEmptyMapValue(c.Network.Options, k, v)
