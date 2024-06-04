@@ -935,6 +935,11 @@ func (c *Cluster) setClusterNetworkDefaults() {
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.ApicConnectionRetryLimit, DefaultAciApicConnectionRetryLimit)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.TaintNotReadyNode, DefaultAciTaintNotReadyNode)
 		setDefaultIfEmpty(&c.Network.AciNetworkProvider.DropLogDisableEvents, DefaultAciDropLogDisableEvents)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexStartupEnabled, DefaultAciOpflexStartupEnabled)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexStartupPolicyDuration, DefaultAciOpflexStartupPolicyDuration)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexStartupResolveAftConn, DefaultAciOpflexStartupResolveAftConn)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexSwitchSyncDelay, DefaultAciOpflexSwitchSyncDelay)
+		setDefaultIfEmpty(&c.Network.AciNetworkProvider.OpflexSwitchSyncDynamic, DefaultAciOpflexSwitchSyncDynamic)
 		networkPluginConfigDefaultsMap[AciOVSMemoryLimit] = c.Network.AciNetworkProvider.OVSMemoryLimit
 		networkPluginConfigDefaultsMap[AciOVSMemoryRequest] = c.Network.AciNetworkProvider.OVSMemoryRequest
 		networkPluginConfigDefaultsMap[AciImagePullPolicy] = c.Network.AciNetworkProvider.ImagePullPolicy
